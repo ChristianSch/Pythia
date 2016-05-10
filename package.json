@@ -1,0 +1,23 @@
+{
+  "name": "Pythia",
+  "version": "1.0.0",
+  "description": "top secret",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ChristianSch/Pythia.git"
+  },
+  "author": "Christian Schulze",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ChristianSch/Pythia/issues"
+  },
+  "homepage": "https://github.com/ChristianSch/Pythia",
+  "dependencies": {
+    "express": "^4.13.4",
+    "socket.io": "^1.4.6"
+  }
+}
