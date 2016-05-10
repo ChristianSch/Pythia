@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pythia - Machine Learning Experiment Platform | Dashboard</title>
+
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,500&subset=latin,greek' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Pythia</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container main-container">
+        <div id="vue-instance">
+            <div>
+                <h2>Recent Experiments</h2>
+
+                <div class="exp-stream"
+                    v-if="experiments.length > 0"
+                    v-for="exp in experiments"
+                    track-by="_id">
+                        <div class="fade-enter panel panel-default">
+                            <div class="panel-heading">
+                                <h3 id="{{ exp._id }}" class="panel-title">{{ exp.name }}</h3>
+                            </div>
+                            <div class="panel-body">
+                                <p class="exp-descr">
+                                    {{ exp.description }}
+                                </p>
+                            </div>
+                        </div>
+                </div>
+                <div v-if="experiments.length == 0" class="jumbotron">
+                    <p>No experiments yet, hold tight!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.17/vue.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/main.js"></script>
+
+</body>
+
+</html>

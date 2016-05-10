@@ -1,0 +1,15 @@
+body {
+    font-size: 16px;
+    font-family: Roboto;
+    font-weight: 400;
+}
+
+.container {
+    width: 90%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.main-container {
+    margin-top: 100px !important;
+}
