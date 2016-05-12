@@ -39,6 +39,12 @@
                                 <p class="exp-descr">
                                     ${ exp.description }
                                 </p>
+
+                                <a href="/experiment/${ exp._id }">
+                                    <button class="btn btn-primary" type="button">
+                                        Models <span class="badge">${ exp.models.length }</span>
+                                    </button>
+                                </a>
                             </div>
                         </div>
                 </div>
