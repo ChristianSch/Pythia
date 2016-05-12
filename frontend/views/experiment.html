@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pythia - Experiment  {{ experiment_id }}</title>
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,500&subset=latin,greek' rel='stylesheet' type='text/css'>
+</head>
+
+<body data-experiment-id="{{ experiment_id }}">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Pythia</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container main-container">
+        <div id="vue-instance">
+            <div>
+                <h2>${ experiment.name }</h2>
+                <time datetime="${ experiment.date_added }">${ experiment.date_added }</time>
+
+                <div class="jumbotron">
+                    ${ experiment.description }
+                </div>
+
+                <h3>Models</h3>
+                <div class="exp-stream"
+                    v-if="experiments.iterations.length > 0"
+                    v-for="iter in experiments.iterations"
+                    track-by="_id">
+                        <div class="fade-enter panel panel-default">
+                            <div class="panel-heading">
+                                <h3 id="${ iter._id }" class="panel-title">${ iter.name }</h3>
+                                <time datetime="${ iter.date_created }"></time>
+                            </div>
+
+                            <div class="panel-body">
+                                <p class="exp-descr">
+                                    ${ iter.description }
+                                </p>
+
+                                <div v-if="${ iter.hyperparameters }">
+                                    <h4>Hyperparameters</h4>
+                                    <code>
+                                        ${ iter.hyperparameters }
+                                    </code>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+
+                <div v-else class="jumbotron">
+                    <p>No models yet, hold tight!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.17/vue.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/experiment.js"></script>
+
+</body>
+
+</html>

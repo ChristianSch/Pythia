@@ -10,10 +10,17 @@ module.exports = function(io) {
      */
 
     var express = require('express'),
+        nunjucks = require('nunjucks'),
         path = require('path'),
         app = module.exports = express();
 
     var Experiment = require(path.join(__dirname, '..', '/models/Experiment')).Experiment;
+
+    // Template config
+    nunjucks.configure('frontend/views', {
+        autoescape: true,
+        express: app
+    });
 
     io.on('connection', function(socket) {
         // Send all the experiments
@@ -24,17 +31,27 @@ module.exports = function(io) {
                 console.log(err);
             }
         });
+
+        socket.on('fetch-experiment', function(id) {
+            Experiment.findOne({
+                '_id': id
+            }, function(err, doc) {
+                socket.emit('fetch-experiment-result', doc);
+            });
+        });
     });
 
     /* Static files middleware */
     app.use(express.static(path.join(__dirname, 'public/')));
 
     app.get('/', function(req, res) {
-        res.sendFile(path.join(__dirname, 'views/index.html'));
-        /*
-        res.status = 200;
-        res.send("Hello, Apollo.");
-        */
+        res.render('index.html');
+    });
+
+    app.get('/experiment/:expId', function(req, res) {
+        res.render('experiment.html', {
+            'experiment_id': req.params.expId
+        });
     });
 
     return app;

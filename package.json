@@ -21,6 +21,7 @@
     "express": "^4.13.4",
     "haikunator": ">1.2.0",
     "mongoose": "^4.4.16",
+    "nunjucks": "^2.4.2",
     "socket.io": "^1.4.6"
   },
   "devDependencies": {

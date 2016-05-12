@@ -28,15 +28,16 @@
 
                 <div class="exp-stream"
                     v-if="experiments.length > 0"
-                    v-for="exp in experiments"
-                    track-by="_id">
+                    v-for="exp in experiments">
                         <div class="fade-enter panel panel-default">
                             <div class="panel-heading">
-                                <h3 id="{{ exp._id }}" class="panel-title">{{ exp.name }}</h3>
+                                <a href="/experiment/${ exp._id }">
+                                    <h3 id="${ exp._id ]]" class="panel-title">${ exp.name }</h3>
+                                </a>
                             </div>
                             <div class="panel-body">
                                 <p class="exp-descr">
-                                    {{ exp.description }}
+                                    ${ exp.description }
                                 </p>
                             </div>
                         </div>
@@ -51,7 +52,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.17/vue.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/js/main.js"></script>
-
 </body>
 
 </html>

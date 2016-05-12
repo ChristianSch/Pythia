@@ -2,6 +2,7 @@
     'use strict';
 
     var socket = io();
+    Vue.config.delimiters = ['${', '}'];
 
     var vm = new Vue({
         el: '#vue-instance',
