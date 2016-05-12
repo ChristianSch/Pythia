@@ -7,12 +7,12 @@
     var metricSchema = new Schema({
         date_added: { type: Date, default: Date.now },
         name: String,
-        value: Number
+        value: Number,
+        epoch: { type: Number, default: 0 }
     });
 
     var modelSchema = new Schema({
         date_added: { type: Date, default: Date.now },
-        parameter: String,
         hyperparameter: String,
         name: String,
         description: String,
@@ -24,7 +24,7 @@
         date_updated: Date,
         name: String,
         description: String,
-        iterations: [modelSchema]
+        models: [modelSchema]
     });
 
     var Experiment = exports.Experiment = mongoose.model('Experiment', experimentSchema);
