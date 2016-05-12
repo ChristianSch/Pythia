@@ -32,33 +32,30 @@
                 </div>
 
                 <h3>Models</h3>
-                <div class="exp-stream"
-                    v-if="experiments.iterations.length > 0"
-                    v-for="iter in experiments.iterations"
-                    track-by="_id">
-                        <div class="fade-enter panel panel-default">
-                            <div class="panel-heading">
-                                <h3 id="${ iter._id }" class="panel-title">${ iter.name }</h3>
-                                <time datetime="${ iter.date_created }"></time>
-                            </div>
-
-                            <div class="panel-body">
-                                <p class="exp-descr">
-                                    ${ iter.description }
-                                </p>
-
-                                <div v-if="${ iter.hyperparameters }">
-                                    <h4>Hyperparameters</h4>
-                                    <code>
-                                        ${ iter.hyperparameters }
-                                    </code>
-                                </div>
-                            </div>
-                        </div>
+                <div v-if="experiment.models.length == 0" class="jumbotron">
+                    <p>No models yet, hold tight!</p>
                 </div>
 
-                <div v-else class="jumbotron">
-                    <p>No models yet, hold tight!</p>
+                <div v-else v-for="model in experiment.models">
+                    <div class="fade-enter panel panel-default">
+                        <div class="panel-heading">
+                            <h3 id="${ model._id }" class="panel-title">${ model.name }</h3>
+                            <time datetime="${ model.date_created }"></time>
+                        </div>
+
+                        <div class="panel-body">
+                            <p class="exp-descr">
+                                ${ model.description }
+                            </p>
+
+                            <div v-if="${ model.hyperparameters }">
+                                <h4>Hyperparameters</h4>
+                                <code>
+                                    ${ model.hyperparameters }
+                                </code>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
