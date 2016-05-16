@@ -54,5 +54,12 @@ module.exports = function(io) {
         });
     });
 
+    app.get('/experiment/:expId/model/:mId', function(req, res) {
+        res.render('model.html', {
+            'experiment_id': req.params.expId,
+            'model_id': req.params.mId
+        });
+    });
+
     return app;
 };

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pythia - Experiment {{ experiment_id }}</title>
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,500&subset=latin,greek' rel='stylesheet' type='text/css'>
+</head>
+
+<body data-experiment-id="{{ experiment_id }}" data-model-id="{{ model_id }}">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Pythia</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container main-container">
+        <div id="vue-instance">
+            <div>
+                <h2>${ model.name }</h2>
+                <time datetime="${ model.date_added }">${ model.date_added }</time>
+
+                <div class="jumbotron">
+                    ${ model.description }
+                </div>
+
+                <h3>Measurements</h3>
+                <div v-if="model.metrics.length == 0" class="jumbotron">
+                    <p>No measurements yet, hold tight!</p>
+                </div>
+
+                <div v-else v-for="metric in model.metrics">
+                    nothing yet
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.17/vue.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/model.js"></script>
+
+</body>
+
+</html>

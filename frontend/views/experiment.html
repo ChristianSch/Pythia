@@ -39,7 +39,9 @@
                 <div v-else v-for="model in experiment.models">
                     <div class="fade-enter panel panel-default">
                         <div class="panel-heading">
-                            <h3 id="${ model._id }" class="panel-title">${ model.name }</h3>
+                            <a href="/experiment/${ experiment._id }/model/${ model._id }">
+                                <h3 id="${ model._id }" class="panel-title">${ model.name }</h3>
+                            </a>
                             <time datetime="${ model.date_created }"></time>
                         </div>
 
