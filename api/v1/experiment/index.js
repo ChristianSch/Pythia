@@ -178,6 +178,8 @@ module.exports = function(io) {
             '_id': req.params.expId,
             'models._id': req.params.itId
         }, function(err, doc) {
+            var model = null;
+
             if (err) {
                 return res
                     .status(500)
@@ -194,9 +196,47 @@ module.exports = function(io) {
                     });
             }
 
-            // TODO
-            io.emit('experiments-updated', [doc]);
-            io.emit('experiment-updated', doc);
+            for (var i in doc.models) {
+                if (doc.models[i]._id == req.params.mId) {
+                    model = doc.models[i];
+                    break;
+                }
+            }
+
+            if (mode !==  null) {
+                var measurement = model.measurements.create({
+                        'name': req.body.name,
+                        'step': req.body.step,
+                        'epoch': req.body.epoch,
+                        'value': req.body.value
+                    });
+
+                doc.models[i].measurements.push(measurement);
+
+                doc.save(function(err, doc) {
+                    if (err) {
+                        return res
+                            .status(500)
+                            .json({
+                                'message': err
+                            });
+                    }
+
+                    io.emit('measurement-added', {
+                        'experiment_id': doc._id,
+                        'model_id': doc.models[i]._id,
+                        'measurement': measurement
+                    });
+
+                    return res.status(200).json(measurement);
+                });
+            }
+
+            return res
+                .status(404)
+                .json({
+                    message: 'No such model'
+                });
         });
     });
 
