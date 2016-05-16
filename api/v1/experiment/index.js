@@ -40,6 +40,28 @@ module.exports = function(io) {
         });
     });
 
+    app.get('/api/v1/experiment/:expId', function(req, res) {
+        Experiment.findById(req.params.expId, function(err, doc) {
+            if (err) {
+                return res
+                    .status(500)
+                    .json({
+                        'message': err
+                    });
+            }
+
+            if (!doc) {
+                return res
+                    .status(404)
+                    .json({
+                        message: 'No such experiment'
+                    });
+            }
+
+            return res.status(200).json(doc);
+        });
+    });
+
     app.post('/api/v1/experiment/:expId/model/', function(req, res) {
         Experiment.findById(req.params.expId, function(err, doc) {
             if (err) {
@@ -84,28 +106,6 @@ module.exports = function(io) {
 
                 return res.status(201).json(model);
             });
-        });
-    });
-
-    app.get('/api/v1/experiment/:expId', function(req, res) {
-        Experiment.findById(req.params.expId, function(err, doc) {
-            if (err) {
-                return res
-                    .status(500)
-                    .json({
-                        'message': err
-                    });
-            }
-
-            if (!doc) {
-                return res
-                    .status(404)
-                    .json({
-                        message: 'No such experiment'
-                    });
-            }
-
-            return res.status(200).json(doc);
         });
     });
 
