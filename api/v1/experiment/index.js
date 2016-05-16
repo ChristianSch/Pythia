@@ -141,7 +141,7 @@ module.exports = function(io) {
         });
     });
 
-    app.post('/api/v1/experiment/:expId/model/:itId/metrics', function(req, res) {
+    app.post('/api/v1/experiment/:expId/model/:itId/measurements', function(req, res) {
         Experiment.findOne({
             '_id': req.params.expId,
             'models._id': req.params.itId

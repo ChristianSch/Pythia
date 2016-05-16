@@ -10,7 +10,7 @@
 
     emptyExp.name = 'Loading';
     emptyExp.date = 'Loading';
-    emptyExp.metrics = [];
+    emptyExp.models = [];
     emptyExp.description = 'Loading';
 
     var vm = new Vue({

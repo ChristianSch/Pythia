@@ -4,10 +4,11 @@
     var mongoose = require('mongoose'),
         Schema = mongoose.Schema;
 
-    var metricSchema = new Schema({
+    var measurementSchema = new Schema({
         date_added: { type: Date, default: Date.now },
         name: String,
         value: Number,
+        step: Number,
         epoch: { type: Number, default: 0 }
     });
 
@@ -16,12 +17,11 @@
         hyperparameter: String,
         name: String,
         description: String,
-        metrics: [metricSchema]
+        measurements: [measurementSchema]
     });
 
     var experimentSchema = new Schema({
         date_added: { type: Date, default: Date.now },
-        date_updated: Date,
         name: String,
         description: String,
         models: [modelSchema]
