@@ -18,10 +18,8 @@ module.exports = function(io) {
     var Experiment = require(path.join(__dirname, '../../..', '/models/Experiment')).Experiment;
 
     app.post('/api/v1/experiment/', function(req, res) {
-        var name = haikunate();
-
         var exp = new Experiment({
-            'name': req.body.name || name,
+            'name': req.body.name || haikunate(),
             'description': req.body.description || "No description given"
         });
 
@@ -61,7 +59,7 @@ module.exports = function(io) {
             }
 
             var model = doc.models.create({
-                'name': req.body.name || haikunator(),
+                'name': req.body.name || haikunate(),
                 'description': req.body.description,
                 'hyperparameter': req.body.hyperparameter
             });
