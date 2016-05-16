@@ -62,6 +62,38 @@ module.exports = function(io) {
         });
     });
 
+    app.put('/api/v1/experiment/:expId', function(req, res) {
+        Experiment.findById(req.params.expId, function(err, doc) {
+            if (err) {
+                return res
+                    .status(500)
+                    .json({
+                        'message': err
+                    });
+            }
+
+            if (!doc) {
+                return res
+                    .status(404)
+                    .json({
+                        message: 'No such experiment'
+                    });
+            }
+
+            if (req.body.description) {
+                doc.description = req.body.description;
+            }
+
+            if (req.body.name) {
+                doc.name = req.body.name;
+            }
+
+            doc.save(function(err, _doc) {
+                return res.status(200).json(_doc);
+            });
+        });
+    });
+
     app.post('/api/v1/experiment/:expId/model/', function(req, res) {
         Experiment.findById(req.params.expId, function(err, doc) {
             if (err) {
