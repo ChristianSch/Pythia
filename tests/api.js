@@ -43,10 +43,8 @@
                         done(err);
                     });
             });
-        });
 
-        describe('Create Experiment: POST /experiment', function() {
-            it('should create an experiment with a randomly generated name', function(done) {
+            it('should create an experiment with a given generated name', function(done) {
                 request(app)
                     .post('/api/v1/experiment')
                     .expect(201)
