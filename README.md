@@ -1,4 +1,4 @@
-# Pythia
+# Pythia ![strider build badge](http://ci.andinfinity.de/ChristianSch/Pythia/badge?branch=master)
 top secret
 
 First version:
