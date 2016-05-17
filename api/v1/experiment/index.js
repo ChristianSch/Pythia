@@ -173,6 +173,60 @@ module.exports = function(io) {
         });
     });
 
+    app.put('/api/v1/experiment/:expId/model/:mId', function(req, res) {
+        Experiment.findById(req.params.expId, function(err, doc) {
+            var model = null;
+
+            if (err) {
+                return res
+                    .status(500)
+                    .json({
+                        'message': err
+                    });
+            }
+
+            if (!doc) {
+                return res
+                    .status(404)
+                    .json({
+                        message: 'No such experiment'
+                    });
+            }
+
+            for (var i in doc.models) {
+                if (doc.models[i]._id == req.params.mId) {
+                    model = doc.models[i];
+                    break;
+                }
+            }
+
+            if (model) {
+                if (req.body.name) {
+                    doc.models[i].name = req.body.name;
+                }
+
+                if (req.body.description) {
+                    doc.models[i].description = req.body.description;
+                }
+
+                if (req.body.hyperparameter) {
+                    doc.models[i].hyperparameter = req.body.hyperparameter;
+                }
+
+                doc.save(function(err, _doc) {
+                    console.log(JSON.stringify(_doc));
+                    return res.status(200).json(_doc);
+                });
+            } else {
+                return res
+                    .status(404)
+                    .json({
+                        message: 'No such model'
+                    });
+            }
+        });
+    });
+
     app.post('/api/v1/experiment/:expId/model/:itId/measurements', function(req, res) {
         Experiment.findOne({
             '_id': req.params.expId,
