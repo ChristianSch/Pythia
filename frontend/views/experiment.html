@@ -36,25 +36,33 @@
                     <p>No models yet, hold tight!</p>
                 </div>
 
-                <div v-else v-for="model in experiment.models">
-                    <div class="fade-enter panel panel-default">
-                        <div class="panel-heading">
-                            <a href="/experiment/${ experiment._id }/model/${ model._id }">
-                                <h3 id="${ model._id }" class="panel-title">${ model.name }</h3>
-                            </a>
-                            <time datetime="${ model.date_created }"></time>
-                        </div>
+                <div v-else>
+                    <input
+                        v-model="searchText"
+                        class="search-input form-control"
+                        type="text"
+                        placeholder="Search name or description">
 
-                        <div class="panel-body">
-                            <p class="exp-descr">
-                                ${ model.description }
-                            </p>
+                    <div v-for="model in experiment.models | filterBy searchText in 'name' 'description'">
+                        <div class="fade-enter panel panel-default">
+                            <div class="panel-heading">
+                                <a href="/experiment/${ experiment._id }/model/${ model._id }">
+                                    <h3 id="${ model._id }" class="panel-title">${ model.name }</h3>
+                                </a>
+                                <time datetime="${ model.date_created }"></time>
+                            </div>
 
-                            <div v-if="${ model.hyperparameters }">
-                                <h4>Hyperparameters</h4>
-                                <code>
-                                    ${ model.hyperparameters }
-                                </code>
+                            <div class="panel-body">
+                                <p class="exp-descr">
+                                    ${ model.description }
+                                </p>
+
+                                <div v-if="${ model.hyperparameters }">
+                                    <h4>Hyperparameters</h4>
+                                    <code>
+                                        ${ model.hyperparameters }
+                                    </code>
+                                </div>
                             </div>
                         </div>
                     </div>
