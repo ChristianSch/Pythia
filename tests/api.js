@@ -63,6 +63,26 @@
             });
         });
 
+        describe('Change Experiment: PUT /experiment/:id', function() {
+            it('should update the name and description', function(done) {
+                request(app)
+                    .put('/api/v1/experiment/' + exp_id)
+                    .expect(200)
+                    .send({
+                        'description': 'just testing put',
+                        'name': 'ImageNet 2011'
+                    })
+                    .end(function(err, res) {
+                        expect(res.body._id).to.be.ok;
+                        expect(res.body.name).to.be.ok;
+                        expect(res.body.description).to.equal('just testing put');
+                        expect(res.body.name).to.equal('ImageNet 2011');
+
+                        done(err);
+                    });
+            });
+        });
+
         describe('Create Model: POST /experiment/:id/model', function() {
             var dummyHyperparams = 'distribution: gaußian, n-grams: 2-grams, stopwords: removed',
                 dummyName = 'bow naïve bayes',
