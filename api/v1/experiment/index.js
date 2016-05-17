@@ -175,7 +175,7 @@ module.exports = function(io) {
 
     app.put('/api/v1/experiment/:expId/model/:mId', function(req, res) {
         Experiment.findById(req.params.expId, function(err, doc) {
-            var model = null;
+            var model = false;
 
             if (err) {
                 return res
@@ -195,7 +195,7 @@ module.exports = function(io) {
 
             for (var i in doc.models) {
                 if (doc.models[i]._id == req.params.mId) {
-                    model = doc.models[i];
+                    model = true;
                     break;
                 }
             }
@@ -214,8 +214,7 @@ module.exports = function(io) {
                 }
 
                 doc.save(function(err, _doc) {
-                    console.log(JSON.stringify(_doc));
-                    return res.status(200).json(_doc);
+                    return res.status(200).json(_doc.models[i]);
                 });
             } else {
                 return res
