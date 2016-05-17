@@ -124,7 +124,7 @@
             });
         });
 
-        describe('Change Model: PUT /experiment/:id/model', function() {
+        describe('Change Model: PUT /experiment/:id/model/:id', function() {
             it('should change the model data', function(done) {
                 request(app)
                     .put('/api/v1/experiment/' + exp_id + '/model/' + model_id)
@@ -135,8 +135,6 @@
                         'hyperparameter': 'baz'
                     })
                     .end(function(err, res) {
-                        console.log(res.body);
-
                         expect(res.body._id).to.be.ok;
                         expect(res.body.name).to.equal('foo');
                         expect(res.body.description).to.equal('bar');
