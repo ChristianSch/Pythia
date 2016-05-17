@@ -146,5 +146,25 @@
                     });
             });
         });
+
+        describe('Change Model: DELETE /experiment/:id/model/:id', function() {
+            it('should remove the document', function(done) {
+                request(app)
+                    .del('/api/v1/experiment/' + exp_id + '/model/' + model_id)
+                    .expect(200)
+                    .end(function(err) {
+                        done(err);
+                    });
+            });
+
+            it('should not get the document', function(done) {
+                request(app)
+                    .get('/api/v1/experiment/' + exp_id + '/model/' + model_id)
+                    .expect(404)
+                    .end(function(err, doc) {
+                        done(err);
+                    });
+            });
+        });
     });
 })();

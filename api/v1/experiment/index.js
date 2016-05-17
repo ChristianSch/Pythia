@@ -226,6 +226,53 @@ module.exports = function(io) {
         });
     });
 
+    app.delete('/api/v1/experiment/:expId/model/:mId', function(req, res) {
+        Experiment.findById(req.params.expId, function(err, doc) {
+            var model = false;
+
+            if (err) {
+                return res
+                    .status(500)
+                    .json({
+                        'message': err
+                    });
+            }
+
+            if (!doc) {
+                return res
+                    .status(404)
+                    .json({
+                        message: 'No such experiment'
+                    });
+            }
+
+            for (var i in doc.models) {
+                if (doc.models[i]._id == req.params.mId) {
+                    model = true;
+                    doc.models.pull(doc.models[i]);
+                    break;
+                }
+            }
+
+            if (model) {
+                io.emit('model-removed', {
+                    'experiment_id': doc._id,
+                    'model_id': req.params.mId
+                });
+                
+                doc.save(function(err, _doc) {
+                    return res.status(200).json(_doc.models[i]);
+                });
+            } else {
+                return res
+                    .status(404)
+                    .json({
+                        message: 'No such model'
+                    });
+            }
+        });
+    });
+
     app.post('/api/v1/experiment/:expId/model/:itId/measurements', function(req, res) {
         Experiment.findOne({
             '_id': req.params.expId,
