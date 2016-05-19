@@ -17,3 +17,6 @@ If several measurement points for any metric exist graphs should be shown
 (by integrating Chart.js). It should be possible to sort models for an
 experiment by the performance of one respective metric, or even more (yet
 to be determined).
+All frontend dependencies should be "batteries included". The frontend should
+also utilize themes instead of deploying seperate html files with repeated
+content for each view.
