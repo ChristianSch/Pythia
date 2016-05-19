@@ -17,3 +17,13 @@ body {
     display: block;
     margin-bottom: 1.5em;
 }
+
+h3.panel-title {
+    display: inline-block !important;
+}
+
+.panel-heading button {
+    float: right;
+    margin-top: -5px;
+    margin-right: -10px;
+}

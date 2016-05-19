@@ -49,6 +49,12 @@
                                 <a href="/experiment/${ experiment._id }/model/${ model._id }">
                                     <h3 id="${ model._id }" class="panel-title">${ model.name }</h3>
                                 </a>
+                                <button type="button"
+                                    class="btn btn-warning btn-sm"
+                                    v-on:click="deleteModel(model._id)">
+                                        <span class="glyphicon glyphicon-trash"
+                                            aria-hidden="true"></span>
+                                </button>
                                 <time datetime="${ model.date_created }"></time>
                             </div>
 
@@ -71,10 +77,10 @@
         </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.17/vue.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/superagent.js"></script>
+    <script src="/js/vue.js"></script>
+    <script src="/js/socket.io.js"></script>
     <script src="/js/experiment.js"></script>
-
 </body>
 
 </html>

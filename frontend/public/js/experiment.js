@@ -1,7 +1,8 @@
 (function() {
     'use strict';
 
-    var socket = io();
+    var socket = io(),
+        request = window.superagent;
 
     Vue.config.delimiters = ['${', '}'];
 
@@ -13,10 +14,21 @@
     emptyExp.models = [];
     emptyExp.description = 'Loading';
 
+    function _deleteModel(model_id) {
+        request
+            .del('/api/v1/experiment/' + expId + '/model/' + model_id)
+            .end(function(res) {
+                console.log(res);
+            });
+    }
+
     var vm = new Vue({
         el: '#vue-instance',
         data: {
             experiment: null
+        },
+        methods: {
+            deleteModel: _deleteModel
         },
         created: function() {
             this.experiment = emptyExp;
@@ -31,6 +43,17 @@
                     this.experiment = data;
                 }
             });
+
+            socket.on('model-removed', function(data) {
+                console.log(this.experiment);
+                if (data.experiment_id == expId) {
+                    for (var i = 0; i < this.experiment.models.length; i++) {
+                        if (this.experiment.models[i]._id == data.model_id) {
+                            this.experiment.models.$remove(this.experiment.models[i]);
+                        }
+                    }
+                }
+            }.bind(this));
         }
     });
 })();
