@@ -15,7 +15,10 @@ module.exports = function(io) {
         mongoose = require('mongoose'),
         haikunate = require('haikunator');
 
-    var Experiment = require(path.join(__dirname, '../../..', '/models/Experiment')).Experiment;
+    var Experiment = require(path.join(__dirname,
+                        '../../..',
+                        '/models/Experiment')).Experiment;
+
 
     app.post('/api/v1/experiment/', function(req, res) {
         var exp = new Experiment({
