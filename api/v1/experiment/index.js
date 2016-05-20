@@ -116,7 +116,42 @@ module.exports = function(io) {
             }
 
             doc.save(function(err, _doc) {
+                if (err) {
+                    return res.status(500).json({
+                        'message': err.message
+                    });
+                }
+
                 return res.status(200).json(_doc);
+            });
+        });
+    });
+
+    app.delete('/api/v1/experiment/:expId/model/:mId', function(req, res) {
+        Experiment.findById(req.params.expId, function(err, doc) {
+            if (err) {
+                return res.status(500).json({
+                        'message': err.message
+                    });
+            }
+
+            if (!doc) {
+                return res.status(404).json({
+                        'message': 'No such experiment'
+                    });
+            }
+
+            doc.remove(function(err, _doc) {
+                if (err) {
+                    return res.status(500).json({
+                        'message': err.message
+                    });
+                }
+
+                return res.status(200).json({
+                    'message': 'Model removed',
+                    'doc': _doc
+                });
             });
         });
     });
@@ -124,17 +159,13 @@ module.exports = function(io) {
     app.post('/api/v1/experiment/:expId/model/', function(req, res) {
         Experiment.findById(req.params.expId, function(err, doc) {
             if (err) {
-                return res
-                    .status(500)
-                    .json({
-                        'message': err
+                return res.status(500).json({
+                        'message': err.message
                     });
             }
 
             if (!doc) {
-                return res
-                    .status(404)
-                    .json({
+                return res.status(404).json({
                         message: 'No such experiment'
                     });
             }
@@ -286,7 +317,7 @@ module.exports = function(io) {
                     'experiment_id': doc._id,
                     'model_id': req.params.mId
                 });
-                
+
                 doc.save(function(err, _doc) {
                     return res.status(200).json(_doc.models[i]);
                 });
