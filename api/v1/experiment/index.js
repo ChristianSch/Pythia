@@ -19,6 +19,30 @@ module.exports = function(io) {
                         '../../..',
                         '/models/Experiment')).Experiment;
 
+    /**
+    * Answers the request for an undefined action route pair with a Bad Request
+    * error.
+    *
+    * @param res the response object as given by the express router
+    */
+    function respondWithNoSuchRoute(res) {
+        res.status(400).json({
+            'message': 'No action defined for this method and path'
+        });
+    }
+
+    /* unused routes */
+    app.get('/api/v1/experiment', function(req, res) {
+        return respondWithNoSuchRoute(res);
+    });
+
+    app.put('/api/v1/experiment', function(req, res) {
+        return respondWithNoSuchRoute(res);
+    });
+
+    app.delete('/api/v1/experiment', function(req, res) {
+        return respondWithNoSuchRoute(res);
+    });
 
     app.post('/api/v1/experiment/', function(req, res) {
         var exp = new Experiment({
