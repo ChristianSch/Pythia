@@ -1,9 +1,21 @@
 # Pythia ![strider build badge](http://ci.andinfinity.de/ChristianSch/Pythia/badge?branch=master)
-top secret
+Machine Learning experiment management platform.
 
-First version:
+Manage your ml experiments to have all your results in one place. Pythia tries
+to give you an overview even if you have experiments running in different
+places.
 
-![](first-vs.gif)
+For this, you consume an API of a Pythia instance in your experiment(s). A
+Python library is currently in the making
+[here](https://github.com/ChristianSch/PyPythia).
+
+**Please note that Pythia is not yet ready to use. The API lacks some routes,
+the frontend is nowhere near finished, we have no charts or anything beyond
+sole listing of experiments and models.**
+
+
+However, I'm always keen to hear your feedback, so create an issue or drop
+me a comment on twitter: [@andinfinity_GER](https://twitter.com/andinfinity_GER).
 
 ## Installation
 Fetch the latest release as a `zip` file or fetch the code via `git clone`. `cd` into the
