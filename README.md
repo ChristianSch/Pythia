@@ -17,6 +17,9 @@ sole listing of experiments and models.**
 However, I'm always keen to hear your feedback, so create an issue or drop
 me a comment on twitter: [@andinfinity_GER](https://twitter.com/andinfinity_GER).
 
+This work was inspired by [FBLearner FLow](https://code.facebook.com/posts/1072626246134461/introducing-fblearner-flow-facebook-s-ai-backbone/)
+and [Pastalog](https://github.com/rewonc/pastalog).
+
 ## Installation
 Fetch the latest release as a `zip` file or fetch the code via `git clone`. `cd` into the
 directory.
