@@ -12,7 +12,7 @@ make things easier. The measurements should be retrievable for only one metric,
 hence allowing filtering via the api.
 
 ### Frontend
-Resources should be creatable via the UI as well as deletable. The listing
+Resources should be createable via the UI as well as deletable. The listing
 should be exhaustive in the sense that all information that the model
 potentially has should be presented. Filtering and sorting should be possible
 on all applicable fields.
@@ -20,6 +20,6 @@ If several measurement points for any metric exist graphs should be shown
 (by integrating Chart.js). It should be possible to sort models for an
 experiment by the performance of one respective metric, or even more (yet
 to be determined).
-All frontend dependencies should be "batteries included". The frontend should
-also utilize themes instead of deploying seperate html files with repeated
+All front-end dependencies should be "batteries included". The front-end should
+also utilize themes instead of deploying separate html files with repeated
 content for each view.
