@@ -169,7 +169,7 @@
             it('should return bad request for get /experiment', function(done) {
                 request(app)
                     .get('/api/v1/experiment')
-                    .expect(400)
+                    .expect(404)
                     .send({'name': 'does not matter'})
                     .end(function(err, doc) {
                         done(err);
@@ -179,7 +179,7 @@
             it('should return bad request for put /experiment', function(done) {
                 request(app)
                     .put('/api/v1/experiment')
-                    .expect(400)
+                    .expect(404)
                     .send({'name': 'does not matter'})
                     .end(function(err, doc) {
                         done(err);
@@ -189,7 +189,7 @@
             it('should return bad request for delete /experiment', function(done) {
                 request(app)
                     .del('/api/v1/experiment')
-                    .expect(400)
+                    .expect(404)
                     .send({'name': 'does not matter'})
                     .end(function(err, doc) {
                         done(err);
