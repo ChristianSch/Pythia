@@ -61,6 +61,26 @@
                         done(err);
                     });
             });
+
+            it('should get all experiments', function(done) {
+                request(app)
+                    .get('/api/v1/experiment/')
+                    .expect(200)
+                    .end(function(err, res) {
+                        var notFail = false;
+
+                        for (var i = 0; i < res.body.length; i++) {
+                            if (res.body[i]._id == exp_id) {
+                                notFail = true;
+                                break;
+                            }
+                        }
+
+                        expect(notFail).to.be.ok;
+
+                        done(err);
+                    });
+            });
         });
 
         describe('Change Experiment: PUT /experiment/:id', function() {
