@@ -122,6 +122,26 @@
                         done(err);
                     });
             });
+
+            it('should get all models, including the just created one', function(done) {
+                request(app)
+                    .get('/api/v1/experiment/' + exp_id + '/model')
+                    .expect(200)
+                    .end(function(err, res) {
+                        var notFail = false;
+
+                        for (var i = 0; i < res.body.length; i++) {
+                            if (res.body[i]._id == model_id) {
+                                notFail = true;
+                                break;
+                            }
+                        }
+
+                        expect(notFail).to.be.ok;
+
+                        done(err);
+                    });
+            });
         });
 
         describe('Change Model: PUT /experiment/:id/model/:id', function() {
