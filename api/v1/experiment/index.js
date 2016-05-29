@@ -64,7 +64,6 @@ module.exports = function(io) {
         });
     });
 
-
     app.get('/api/v1/experiment/:expId', function(req, res) {
         Experiment.findById(req.params.expId, function(err, doc) {
             if (err) {
@@ -125,7 +124,7 @@ module.exports = function(io) {
         });
     });
 
-    app.delete('/api/v1/experiment/:expId/model/:mId', function(req, res) {
+    app.delete('/api/v1/experiment/:expId', function(req, res) {
         Experiment.findById(req.params.expId, function(err, doc) {
             if (err) {
                 return res.status(500).json({
