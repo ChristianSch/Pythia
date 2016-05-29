@@ -15,7 +15,7 @@ lib-cov
 coverage
 
 # Coverall config
-.coverall.yml
+.coveralls.yml
 
 # Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
 .grunt
