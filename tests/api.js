@@ -263,7 +263,7 @@
         describe('Create Measurements: GET /experiment/:id/model/:id/measurements', function() {
         });
 
-        describe('Change Model: DELETE /experiment/:id/model/:id', function() {
+        describe('Delete Model: DELETE /experiment/:id/model/:id', function() {
             it('should remove the document', function(done) {
                 request(app)
                     .del('/api/v1/experiment/' + exp_id + '/model/' + model_id)
