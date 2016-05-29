@@ -13,6 +13,27 @@
         model_id = null;
 
     describe('REST API:', function() {
+        describe('Get API: GET /api', function() {
+            request(app)
+                .get('/api')
+                .expect(200)
+                .end(function(err, res) {
+                    expect(res.body._links.self.href).to.equal('/api/');
+                    expect(res.body._links.v1.href).to.equal('/api/v1');
+                });
+        });
+
+        describe('Get API/v1: GET /api/v1', function() {
+            request(app)
+                .get('/api/v1')
+                .expect(200)
+                .end(function(err, res) {
+                    expect(res.body._links.self.href).to.equal('/api/v1');
+                    expect(res.body._links.experiment.href).to.equal('/api/v1/experiment');
+                });
+        });
+
+
         describe('Create Experiment: POST /experiment', function() {
             it('should create an experiment with a randomly generated name', function(done) {
                 request(app)
