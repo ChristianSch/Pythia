@@ -1,4 +1,4 @@
-# Pythia ![strider build badge](http://ci.andinfinity.de/ChristianSch/Pythia/badge?branch=master) [![Coverage Status](https://coveralls.io/repos/github/ChristianSch/Pythia/badge.svg?branch=master)](https://coveralls.io/github/ChristianSch/Pythia?branch=master)
+# Pythia [![strider build badge](http://ci.andinfinity.de/ChristianSch/Pythia/badge?branch=master)](http://ci.andinfinity.de/christiansch/pythia/) [![Coverage Status](https://coveralls.io/repos/github/ChristianSch/Pythia/badge.svg?branch=master)](https://coveralls.io/github/ChristianSch/Pythia?branch=master)
 Machine Learning experiment management platform.
 
 Manage your ml experiments to have all your results in one place. Pythia tries
