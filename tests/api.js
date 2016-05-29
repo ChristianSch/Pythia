@@ -81,6 +81,24 @@
                         done(err);
                     });
             });
+
+            it('should return 500', function(done) {
+                request(app)
+                    .get('/api/v1/experiment/invalid_id')
+                    .expect(500)
+                    .end(function(err, res) {
+                        done(err);
+                    });
+            });
+
+            it('should return 404', function(done) {
+                request(app)
+                    .get('/api/v1/experiment/000000000000000000000000')
+                    .expect(404)
+                    .end(function(err, res) {
+                        done(err);
+                    });
+                });
         });
 
         describe('Change Experiment: PUT /experiment/:id', function() {
@@ -98,6 +116,24 @@
                         expect(res.body.description).to.equal('just testing put');
                         expect(res.body.name).to.equal('ImageNet 2011');
 
+                        done(err);
+                    });
+            });
+
+            it('should return 500', function(done) {
+                request(app)
+                    .put('/api/v1/experiment/invalid_id')
+                    .expect(500)
+                    .end(function(err, res) {
+                        done(err);
+                    });
+            });
+
+            it('should return 404', function(done) {
+                request(app)
+                    .put('/api/v1/experiment/000000000000000000000000')
+                    .expect(404)
+                    .end(function(err, res) {
                         done(err);
                     });
             });
@@ -200,6 +236,35 @@
                     .get('/api/v1/experiment/' + exp_id + '/model/' + model_id)
                     .expect(404)
                     .end(function(err, doc) {
+                        done(err);
+                    });
+            });
+        });
+
+        describe('Delete Experiment: DELETE /experiment/:id', function() {
+            it('should remove the document', function(done) {
+                request(app)
+                    .del('/experiment/' + exp_id)
+                    .expect(200)
+                    .end(function(err, res) {
+                        done(err);
+                    });
+            });
+
+            it('should return 500', function(done) {
+                request(app)
+                    .del('/api/v1/experiment/invalid_id')
+                    .expect(500)
+                    .end(function(err, res) {
+                        done(err);
+                    });
+            });
+
+            it('should return 404', function(done) {
+                request(app)
+                    .del('/api/v1/experiment/000000000000000000000000')
+                    .expect(404)
+                    .end(function(err, res) {
                         done(err);
                     });
             });
