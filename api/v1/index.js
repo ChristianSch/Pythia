@@ -40,8 +40,8 @@ module.exports = function(io) {
                 'self': {
                     'href': '/api/v1'
                 },
-                'users': {
-                    'href': '/api/v1/users'
+                'experiment': {
+                    'href': '/api/v1/experiment'
                 }
             }
         });
