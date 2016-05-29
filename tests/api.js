@@ -219,6 +219,15 @@
                         done(err);
                     });
             });
+
+            it('should return 404', function(done) {
+                request(app)
+                    .get('/api/v1/experiment/' + exp_id + '/model/000000000000000000000000')
+                    .expect(404)
+                    .end(function(err, res) {
+                        done(err);
+                    });
+            });
         });
 
         describe('Change Model: PUT /experiment/:id/model/:id', function() {
@@ -240,6 +249,18 @@
                         done(err);
                     });
             });
+
+            it('should return 404', function(done) {
+                request(app)
+                    .put('/api/v1/experiment/' + exp_id + '/model/000000000000000000000000')
+                    .expect(404)
+                    .end(function(err, res) {
+                        done(err);
+                    });
+            });
+        });
+
+        describe('Create Measurements: GET /experiment/:id/model/:id/measurements', function() {
         });
 
         describe('Change Model: DELETE /experiment/:id/model/:id', function() {
@@ -257,6 +278,15 @@
                     .get('/api/v1/experiment/' + exp_id + '/model/' + model_id)
                     .expect(404)
                     .end(function(err, doc) {
+                        done(err);
+                    });
+            });
+
+            it('should return 404', function(done) {
+                request(app)
+                    .del('/api/v1/experiment/' + exp_id + '/model/000000000000000000000000')
+                    .expect(404)
+                    .end(function(err, res) {
                         done(err);
                     });
             });
@@ -312,5 +342,7 @@
                     });
             });
         });
+
+        // TODO: delete models
     });
 })();
