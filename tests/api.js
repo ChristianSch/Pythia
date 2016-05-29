@@ -244,7 +244,7 @@
         describe('Delete Experiment: DELETE /experiment/:id', function() {
             it('should remove the document', function(done) {
                 request(app)
-                    .del('/experiment/' + exp_id)
+                    .del('/api/v1/experiment/' + exp_id)
                     .expect(200)
                     .end(function(err, res) {
                         done(err);
