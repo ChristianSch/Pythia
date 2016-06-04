@@ -318,13 +318,16 @@
         });
 
         describe('Get Measurements for Name: GET /experiment/:id/model/:id/measurements/forname/:name', function() {
-            it('should retrieve previously created loss', function() {
+            it('should retrieve previously created loss', function(done) {
                 request(app)
                     .get('/api/v1/experiment/' + exp_id + '/model/' + model_id + '/measurements/forname/totalLoss')
                     .expect(200)
                     .end(function(err, res) {
-                        assert(res.length > 0);
-                        expect(res[0].name).to.equal('totalLoss');
+                        assert(res.body.length > 0);
+                        expect(res.body[0].name).to.equal('totalLoss');
+                        done(err);
+                    });
+            });
                         done(err);
                     });
             });
