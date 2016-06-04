@@ -10,7 +10,8 @@
     var app = require('../').app;
 
     var exp_id = null,
-        model_id = null;
+        model_id = null,
+        i = 0;
 
     describe('REST API:', function() {
         describe('Get API: GET /api', function() {
@@ -90,7 +91,7 @@
                     .end(function(err, res) {
                         var notFail = false;
 
-                        for (var i = 0; i < res.body.length; i++) {
+                        for (i = 0; i < res.body.length; i++) {
                             if (res.body[i]._id == exp_id) {
                                 notFail = true;
                                 break;
@@ -207,7 +208,7 @@
                     .end(function(err, res) {
                         var notFail = false;
 
-                        for (var i = 0; i < res.body.length; i++) {
+                        for (i = 0; i < res.body.length; i++) {
                             if (res.body[i]._id == model_id) {
                                 notFail = true;
                                 break;
