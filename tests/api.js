@@ -287,6 +287,36 @@
             });
         });
 
+        describe('Get Measurements: GET /experiment/:id/model/:id/measurements', function() {
+            it('should return 200', function(done) {
+                request(app)
+                    .get('/api/v1/experiment/' + exp_id + '/model/' + model_id + '/measurements')
+                    .expect(200)
+                    .end(function(err, res) {
+                        assert(res.body.length > 0);
+                        done(err);
+                    });
+            });
+
+            it('should return 404', function(done) {
+                request(app)
+                    .get('/api/v1/experiment/' + exp_id + '/model/000000000000000000000000/measurements')
+                    .expect(404)
+                    .end(function(err, res) {
+                        done(err);
+                    });
+            });
+
+            it('should return 404', function(done) {
+                request(app)
+                    .get('/api/v1/experiment/000000000000000000000000/model/000000000000000000000000/measurements')
+                    .expect(404)
+                    .end(function(err, res) {
+                        done(err);
+                    });
+            });
+        });
+
         describe('Get Measurements for Name: GET /experiment/:id/model/:id/measurements/forname/:name', function() {
             it('should retrieve previously created loss', function() {
                 request(app)
