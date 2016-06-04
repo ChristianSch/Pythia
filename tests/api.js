@@ -34,7 +34,6 @@
                 });
         });
 
-
         describe('Create/Get Experiment: POST/GET /experiment', function() {
             it('should create an experiment with a randomly generated name', function(done) {
                 request(app)
@@ -331,7 +330,7 @@
         describe('Create Measurements: POST /experiment/:id/model/:id/measurements', function() {
             it('should return 404', function(done) {
                 request(app)
-                    .post('/api/v1/experiment/' + exp_id + '/model/000000000000000000000000')
+                    .post('/api/v1/experiment/' + exp_id + '/model/000000000000000000000000/measurements')
                     .expect(404)
                     .end(function(err, res) {
                         expect(res.body.message).to.be.ok;
@@ -341,7 +340,7 @@
 
             it('should return 404', function(done) {
                 request(app)
-                    .post('/api/v1/experiment/000000000000000000000000/model/000000000000000000000000')
+                    .post('/api/v1/experiment/000000000000000000000000/model/000000000000000000000000/measurements')
                     .expect(404)
                     .end(function(err, res) {
                         expect(res.body.message).to.be.ok;
@@ -548,6 +547,16 @@
                     .del('/api/v1/experiment')
                     .expect(404)
                     .send({'name': 'does not matter'})
+                    .end(function(err, res) {
+                        expect(res.body.message).to.be.ok;
+                        done(err);
+                    });
+            });
+
+            it('should return 404', function(done) {
+                request(app)
+                    .get('/api/v1/invalid')
+                    .expect(404)
                     .end(function(err, res) {
                         expect(res.body.message).to.be.ok;
                         done(err);
