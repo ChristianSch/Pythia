@@ -328,6 +328,21 @@
                         done(err);
                     });
             });
+
+            it('should return 404', function(done) {
+                request(app)
+                    .get('/api/v1/experiment/' + exp_id + '/model/000000000000000000000000/measurements/forname/totalLoss')
+                    .expect(404)
+                    .end(function(err, res) {
+                        done(err);
+                    });
+            });
+
+            it('should return 404', function(done) {
+                request(app)
+                    .get('/api/v1/experiment/000000000000000000000000/model/000000000000000000000000/measurements/forname/totalLoss')
+                    .expect(404)
+                    .end(function(err, res) {
                         done(err);
                     });
             });
