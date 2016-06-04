@@ -19,6 +19,8 @@ module.exports = function(io) {
                         '../../..',
                         '/models/Experiment')).Experiment;
 
+    var i = 0;
+
     app.post('/api/v1/experiment/', function(req, res) {
         var exp = new Experiment({
             'name': req.body.name || haikunate(),
@@ -236,7 +238,7 @@ module.exports = function(io) {
                     });
             }
 
-            for (var i in doc.models) {
+            for (i in doc.models) {
                 if (doc.models[i]._id == req.params.mId) {
                     return res.status(200).json(doc.models[i]);
                 }
@@ -270,7 +272,7 @@ module.exports = function(io) {
                     });
             }
 
-            for (var i in doc.models) {
+            for (i in doc.models) {
                 if (doc.models[i]._id == req.params.mId) {
                     model = true;
                     break;
@@ -323,7 +325,7 @@ module.exports = function(io) {
                     });
             }
 
-            for (var i in doc.models) {
+            for (i in doc.models) {
                 if (doc.models[i]._id == req.params.mId) {
                     model = true;
                     doc.models.pull(doc.models[i]);
@@ -379,7 +381,7 @@ module.exports = function(io) {
                 });
             }
 
-            for (var i in doc.models) {
+            for (i in doc.models) {
                 if (doc.models[i]._id == req.params.mId) {
                     model = doc.models[i];
                     break;
@@ -447,7 +449,7 @@ module.exports = function(io) {
                     });
             }
 
-            for (var i in doc.models) {
+            for (i in doc.models) {
                 if (doc.models[i]._id == req.params.mId) {
                     model = doc.models[i];
                     break;
@@ -489,7 +491,7 @@ module.exports = function(io) {
                     });
             }
 
-            for (var i in doc.models) {
+            for (i in doc.models) {
                 if (doc.models[i]._id == req.params.mId) {
                     model = doc.models[i];
                     break;
@@ -497,7 +499,7 @@ module.exports = function(io) {
             }
 
             if (model) {
-                for (var i in model.measurements) {
+                for (i in model.measurements) {
                     if (model.measurements[i].name == req.params.name) {
                         dataPoints.push(model.measurements[i]);
                     }
