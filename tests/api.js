@@ -362,7 +362,7 @@
                 request(app)
                     .get('/api/v1/experiment/' + exp_id + '/model/' + model_id)
                     .expect(404)
-                    .end(function(err, doc) {
+                    .end(function(err, res) {
                         done(err);
                     });
             });
