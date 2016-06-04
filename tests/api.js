@@ -58,6 +58,7 @@
                     .get('/api/v1/experiment/000000000000000000000000/')
                     .expect(404)
                     .end(function(err, res) {
+                        expect(res.body.message).to.be.ok;
                         done(err);
                     });
             });
@@ -118,6 +119,7 @@
                     .get('/api/v1/experiment/invalid_id')
                     .expect(500)
                     .end(function(err, res) {
+                        expect(res.body.message).to.be.ok;
                         done(err);
                     });
             });
@@ -127,6 +129,7 @@
                     .get('/api/v1/experiment/000000000000000000000000')
                     .expect(404)
                     .end(function(err, res) {
+                        expect(res.body.message).to.be.ok;
                         done(err);
                     });
                 });
@@ -156,6 +159,7 @@
                     .put('/api/v1/experiment/invalid_id')
                     .expect(500)
                     .end(function(err, res) {
+                        expect(res.body.message).to.be.ok;
                         done(err);
                     });
             });
@@ -165,6 +169,7 @@
                     .put('/api/v1/experiment/000000000000000000000000')
                     .expect(404)
                     .end(function(err, res) {
+                        expect(res.body.message).to.be.ok;
                         done(err);
                     });
             });
@@ -180,6 +185,7 @@
                     .post('/api/v1/experiment/000000000000000000000000/model')
                     .expect(404)
                     .end(function(err, res) {
+                        expect(res.body.message).to.be.ok;
                         done(err);
                     });
             });
@@ -190,6 +196,7 @@
                     .get('/api/v1/experiment/000000000000000000000000/model')
                     .expect(404)
                     .end(function(err, res) {
+                        expect(res.body.message).to.be.ok;
                         done(err);
                     });
             });
@@ -199,6 +206,7 @@
                     .get('/api/v1/experiment/000000000000000000000000/model/000000000000000000000000')
                     .expect(404)
                     .end(function(err, res) {
+                        expect(res.body.message).to.be.ok;
                         done(err);
                     });
             });
@@ -263,6 +271,7 @@
                     .get('/api/v1/experiment/000000000000000000000000/model/000000000000000000000000')
                     .expect(404)
                     .end(function(err, res) {
+                        expect(res.body.message).to.be.ok;
                         done(err);
                     });
             });
@@ -272,6 +281,7 @@
                     .get('/api/v1/experiment/' + exp_id + '/model/000000000000000000000000')
                     .expect(404)
                     .end(function(err, res) {
+                        expect(res.body.message).to.be.ok;
                         done(err);
                     });
             });
@@ -302,6 +312,7 @@
                     .put('/api/v1/experiment/' + exp_id + '/model/000000000000000000000000')
                     .expect(404)
                     .end(function(err, res) {
+                        expect(res.body.message).to.be.ok;
                         done(err);
                     });
             });
@@ -311,6 +322,7 @@
                     .put('/api/v1/experiment/000000000000000000000000/model/000000000000000000000000')
                     .expect(404)
                     .end(function(err, res) {
+                        expect(res.body.message).to.be.ok;
                         done(err);
                     });
             });
@@ -322,6 +334,7 @@
                     .post('/api/v1/experiment/' + exp_id + '/model/000000000000000000000000')
                     .expect(404)
                     .end(function(err, res) {
+                        expect(res.body.message).to.be.ok;
                         done(err);
                     });
             });
@@ -331,6 +344,7 @@
                     .post('/api/v1/experiment/000000000000000000000000/model/000000000000000000000000')
                     .expect(404)
                     .end(function(err, res) {
+                        expect(res.body.message).to.be.ok;
                         done(err);
                     });
             });
@@ -385,6 +399,7 @@
                     .get('/api/v1/experiment/' + exp_id + '/model/000000000000000000000000/measurements')
                     .expect(404)
                     .end(function(err, res) {
+                        expect(res.body.message).to.be.ok;
                         done(err);
                     });
             });
@@ -394,6 +409,7 @@
                     .get('/api/v1/experiment/' + exp_id + '/model/000000000000000000000000/measurements')
                     .expect(404)
                     .end(function(err, res) {
+                        expect(res.body.message).to.be.ok;
                         done(err);
                     });
             });
@@ -403,6 +419,7 @@
                     .get('/api/v1/experiment/000000000000000000000000/model/000000000000000000000000/measurements')
                     .expect(404)
                     .end(function(err, res) {
+                        expect(res.body.message).to.be.ok;
                         done(err);
                     });
             });
@@ -425,6 +442,7 @@
                     .get('/api/v1/experiment/' + exp_id + '/model/000000000000000000000000/measurements/forname/totalLoss')
                     .expect(404)
                     .end(function(err, res) {
+                        expect(res.body.message).to.be.ok;
                         done(err);
                     });
             });
@@ -434,6 +452,7 @@
                     .get('/api/v1/experiment/000000000000000000000000/model/000000000000000000000000/measurements/forname/totalLoss')
                     .expect(404)
                     .end(function(err, res) {
+                        expect(res.body.message).to.be.ok;
                         done(err);
                     });
             });
@@ -454,6 +473,7 @@
                     .get('/api/v1/experiment/' + exp_id + '/model/' + model_id)
                     .expect(404)
                     .end(function(err, res) {
+                        expect(res.body.message).to.be.ok;
                         done(err);
                     });
             });
@@ -463,6 +483,7 @@
                     .del('/api/v1/experiment/' + exp_id + '/model/000000000000000000000000')
                     .expect(404)
                     .end(function(err, res) {
+                        expect(res.body.message).to.be.ok;
                         done(err);
                     });
             });
@@ -472,6 +493,7 @@
                     .del('/api/v1/experiment/000000000000000000000000/model/000000000000000000000000')
                     .expect(404)
                     .end(function(err, res) {
+                        expect(res.body.message).to.be.ok;
                         done(err);
                     });
             });
@@ -483,6 +505,7 @@
                     .del('/api/v1/experiment/' + exp_id)
                     .expect(200)
                     .end(function(err, res) {
+                        expect(res.body.message).to.be.ok;
                         done(err);
                     });
             });
@@ -492,6 +515,7 @@
                     .del('/api/v1/experiment/invalid_id')
                     .expect(500)
                     .end(function(err, res) {
+                        expect(res.body.message).to.be.ok;
                         done(err);
                     });
             });
@@ -501,6 +525,7 @@
                     .del('/api/v1/experiment/000000000000000000000000')
                     .expect(404)
                     .end(function(err, res) {
+                        expect(res.body.message).to.be.ok;
                         done(err);
                     });
             });
@@ -512,7 +537,8 @@
                     .put('/api/v1/experiment')
                     .expect(404)
                     .send({'name': 'does not matter'})
-                    .end(function(err, doc) {
+                    .end(function(err, res) {
+                        expect(res.body.message).to.be.ok;
                         done(err);
                     });
             });
@@ -522,7 +548,8 @@
                     .del('/api/v1/experiment')
                     .expect(404)
                     .send({'name': 'does not matter'})
-                    .end(function(err, doc) {
+                    .end(function(err, res) {
+                        expect(res.body.message).to.be.ok;
                         done(err);
                     });
             });
