@@ -35,7 +35,7 @@
         });
 
 
-        describe('Create Experiment: POST /experiment', function() {
+        describe('Create/Get Experiment: POST/GET /experiment', function() {
             it('should create an experiment with a randomly generated name', function(done) {
                 request(app)
                     .post('/api/v1/experiment')
@@ -49,6 +49,15 @@
                         expect(res.body.name).to.be.ok;
                         expect(res.body.description).to.equal('test');
 
+                        done(err);
+                    });
+            });
+
+            it('should return 404', function(done) {
+                request(app)
+                    .get('/api/v1/experiment/000000000000000000000000/')
+                    .expect(404)
+                    .end(function(err, res) {
                         done(err);
                     });
             });
@@ -161,10 +170,38 @@
             });
         });
 
-        describe('Create Model: POST /experiment/:id/model', function() {
+        describe('Create/Get Model: POST/GET /experiment/:id/model', function() {
             var dummyHyperparams = 'distribution: gaußian, n-grams: 2-grams, stopwords: removed',
                 dummyName = 'bow naïve bayes',
                 dummyDescr = 'some description';
+
+            it('should return 404', function(done) {
+                request(app)
+                    .post('/api/v1/experiment/000000000000000000000000/model')
+                    .expect(404)
+                    .end(function(err, res) {
+                        done(err);
+                    });
+            });
+
+
+            it('should return 404', function(done) {
+                request(app)
+                    .get('/api/v1/experiment/000000000000000000000000/model')
+                    .expect(404)
+                    .end(function(err, res) {
+                        done(err);
+                    });
+            });
+
+            it('should return 404', function(done) {
+                request(app)
+                    .get('/api/v1/experiment/000000000000000000000000/model/000000000000000000000000')
+                    .expect(404)
+                    .end(function(err, res) {
+                        done(err);
+                    });
+            });
 
             it('should create model for given experiment', function(done) {
                 request(app)
@@ -223,6 +260,15 @@
 
             it('should return 404', function(done) {
                 request(app)
+                    .get('/api/v1/experiment/000000000000000000000000/model/000000000000000000000000')
+                    .expect(404)
+                    .end(function(err, res) {
+                        done(err);
+                    });
+            });
+
+            it('should return 404', function(done) {
+                request(app)
                     .get('/api/v1/experiment/' + exp_id + '/model/000000000000000000000000')
                     .expect(404)
                     .end(function(err, res) {
@@ -259,9 +305,36 @@
                         done(err);
                     });
             });
+
+            it('should return 404', function(done) {
+                request(app)
+                    .put('/api/v1/experiment/000000000000000000000000/model/000000000000000000000000')
+                    .expect(404)
+                    .end(function(err, res) {
+                        done(err);
+                    });
+            });
         });
 
         describe('Create Measurements: POST /experiment/:id/model/:id/measurements', function() {
+            it('should return 404', function(done) {
+                request(app)
+                    .post('/api/v1/experiment/' + exp_id + '/model/000000000000000000000000')
+                    .expect(404)
+                    .end(function(err, res) {
+                        done(err);
+                    });
+            });
+
+            it('should return 404', function(done) {
+                request(app)
+                    .post('/api/v1/experiment/000000000000000000000000/model/000000000000000000000000')
+                    .expect(404)
+                    .end(function(err, res) {
+                        done(err);
+                    });
+            });
+
             it('should return bad request', function(done) {
                 request(app)
                     .post('/api/v1/experiment/' + exp_id + '/model/' + model_id + '/measurements')
@@ -294,6 +367,24 @@
                     .expect(200)
                     .end(function(err, res) {
                         assert(res.body.length > 0);
+                        done(err);
+                    });
+            });
+
+            it('should return 404', function(done) {
+                request(app)
+                    .del('/api/v1/experiment/000000000000000000000000/model/000000000000000000000000/measurements')
+                    .expect(404)
+                    .end(function(err, res) {
+                        done(err);
+                    });
+            });
+
+            it('should return 404', function(done) {
+                request(app)
+                    .get('/api/v1/experiment/' + exp_id + '/model/000000000000000000000000/measurements')
+                    .expect(404)
+                    .end(function(err, res) {
                         done(err);
                     });
             });
@@ -370,6 +461,15 @@
             it('should return 404', function(done) {
                 request(app)
                     .del('/api/v1/experiment/' + exp_id + '/model/000000000000000000000000')
+                    .expect(404)
+                    .end(function(err, res) {
+                        done(err);
+                    });
+            });
+
+            it('should return 404', function(done) {
+                request(app)
+                    .del('/api/v1/experiment/000000000000000000000000/model/000000000000000000000000')
                     .expect(404)
                     .end(function(err, res) {
                         done(err);
