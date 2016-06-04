@@ -350,10 +350,10 @@ module.exports = function(io) {
         });
     });
 
-    app.post('/api/v1/experiment/:expId/model/:itId/measurements', function(req, res) {
+    app.post('/api/v1/experiment/:expId/model/:mId/measurements', function(req, res) {
         Experiment.findOne({
             '_id': req.params.expId,
-            'models._id': req.params.itId
+            'models._id': req.params.mId
         }, function(err, doc) {
             var model = null;
 
@@ -373,6 +373,12 @@ module.exports = function(io) {
                     });
             }
 
+            if (!req.body.name && !req.body.value) {
+                return res.status(400).json({
+                    'message': 'Missing mandatory fields (name, value)'
+                });
+            }
+
             for (var i in doc.models) {
                 if (doc.models[i]._id == req.params.mId) {
                     model = doc.models[i];
@@ -380,11 +386,11 @@ module.exports = function(io) {
                 }
             }
 
-            if (mode !==  null) {
+            if (model) {
                 var measurement = model.measurements.create({
                         'name': req.body.name,
-                        'step': req.body.step,
-                        'epoch': req.body.epoch,
+                        'step': req.body.step || null,
+                        'epoch': req.body.epoch || null,
                         'value': req.body.value
                     });
 
@@ -405,14 +411,18 @@ module.exports = function(io) {
                         'measurement': measurement
                     });
 
-                    return res.status(200).json(measurement);
+                    return res.status(201).json(measurement);
                 });
+            } else {
+                return res
+                    .status(404)
+                    .json({
+                        message: 'No such model'
+                    });
             }
+        });
+    });
 
-            return res
-                .status(404)
-                .json({
-                    message: 'No such model'
                 });
         });
     });
