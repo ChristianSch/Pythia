@@ -464,8 +464,53 @@ module.exports = function(io) {
         });
     });
 
+    app.get('/api/v1/experiment/:expId/model/:mId/measurements/forname/:name', function(req, res) {
+        Experiment.findOne({
+            '_id': req.params.expId,
+            'models._id': req.params.mId
+        }, function(err, doc) {
+            var out = {},
+                model = null,
+                dataPoints = [];
+
+            if (err) {
+                return res
+                    .status(500)
+                    .json({
+                        'message': err
+                    });
+            }
+
+            if (!doc) {
+                return res
+                    .status(404)
+                    .json({
+                        message: 'No such experiment'
+                    });
+            }
+
+            for (var i in doc.models) {
+                if (doc.models[i]._id == req.params.mId) {
+                    model = doc.models[i];
+                    break;
+                }
+            }
+
+            if (model) {
+                for (var i in model.measurements) {
+                    if (model.measurements[i].name == req.params.name) {
+                        dataPoints.push(model.measurements[i]);
+                    }
+                }
+
+                return res.status(200).json(dataPoints);
+            } else {
+                return res.status(404).json({
+                    'message': 'No such model'
                 });
+            }
         });
+
     });
 
     app.get('/api/v1/*', function(req, res) {
