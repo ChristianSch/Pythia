@@ -260,7 +260,43 @@
             });
         });
 
-        describe('Create Measurements: GET /experiment/:id/model/:id/measurements', function() {
+        describe('Create Measurements: POST /experiment/:id/model/:id/measurements', function() {
+            it('should return bad request', function(done) {
+                request(app)
+                    .post('/api/v1/experiment/' + exp_id + '/model/' + model_id + '/measurements')
+                    .expect(400)
+                    .end(function(err, res) {
+                        expect(res.body.message).to.equal('Missing mandatory fields (name, value)');
+                        done(err);
+                    });
+            });
+
+            it('should create measurement point', function(done) {
+                request(app)
+                    .post('/api/v1/experiment/' + exp_id + '/model/' + model_id + '/measurements')
+                    .expect(201)
+                    .send({
+                        'name': 'totalLoss',
+                        'step': '-0.33',
+                        'epoch': '0'
+                    })
+                    .end(function(err, res) {
+                        done(err);
+                    });
+            });
+        });
+
+        describe('Get Measurements for Name: GET /experiment/:id/model/:id/measurements/forname/:name', function() {
+            it('should retrieve previously created loss', function() {
+                request(app)
+                    .get('/api/v1/experiment/' + exp_id + '/model/' + model_id + '/measurements/forname/totalLoss')
+                    .expect(200)
+                    .end(function(err, res) {
+                        assert(res.length > 0);
+                        expect(res[0].name).to.equal('totalLoss');
+                        done(err);
+                    });
+            });
         });
 
         describe('Delete Model: DELETE /experiment/:id/model/:id', function() {
