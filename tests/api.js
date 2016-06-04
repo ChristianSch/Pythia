@@ -353,7 +353,7 @@
                 request(app)
                     .del('/api/v1/experiment/' + exp_id + '/model/' + model_id)
                     .expect(200)
-                    .end(function(err) {
+                    .end(function(err, res) {
                         done(err);
                     });
             });
