@@ -21,6 +21,56 @@ module.exports = function(io) {
 
     var i = 0;
 
+    /**
+     * Filters raw database output in form of an experiment entry to be returned
+     * by the API.
+     *
+     * @param doc javascript object presentation of raw databse entry
+    */
+    function filterExperimentFields(doc) {
+        return {
+            '_id': doc._id,
+            'name': doc.name,
+            'description': doc.description,
+            'date_added': doc.date_added,
+            'models': doc.models // empty anyway
+        };
+    }
+
+    /**
+     * Filters raw database output in form of a model entry to be returned
+     * by the API.
+     *
+     * @param doc javascript object presentation of raw databse entry
+    */
+    function filterModelFields(doc) {
+        return {
+            '_id': doc._id,
+            'date_added': doc.date_added,
+            'hyperparameter': doc.hyperparameter,
+            'name': doc.name,
+            'description': doc.description,
+            'measurements': doc.measurements
+        };
+    }
+
+    /**
+     * Filters raw database output in form of a measurement entry to be returned
+     * by the API.
+     *
+     * @param doc javascript object presentation of raw databse entry
+    */
+    function filterMeasurementFields(doc) {
+        return {
+            '_id': doc._id,
+            'date_added': doc.date_added,
+            'name': doc.name,
+            'value': doc.value,
+            'step': doc.step,
+            'epoch': doc.epoch
+        };
+    }
+
     app.post('/api/v1/experiment/', function(req, res) {
         var exp = new Experiment({
             'name': req.body.name || haikunate(),
@@ -40,7 +90,7 @@ module.exports = function(io) {
 
             return res
                 .status(201)
-                .json(doc);
+                .json(filterExperimentFields(doc));
         });
     });
 
@@ -62,7 +112,13 @@ module.exports = function(io) {
                     });
             }
 
-            return res.status(200).json(doc);
+            var docs = [];
+
+            for (var i in doc) {
+                docs.push(filterExperimentFields(doc[i]));
+            }
+
+            return res.status(200).json(docs);
         });
     });
 
@@ -84,7 +140,7 @@ module.exports = function(io) {
                     });
             }
 
-            return res.status(200).json(doc);
+            return res.status(200).json(filterExperimentFields(doc));
         });
     });
 
@@ -121,7 +177,7 @@ module.exports = function(io) {
                     });
                 }
 
-                return res.status(200).json(_doc);
+                return res.status(200).json(filterExperimentFields(_doc));
             });
         });
     });
@@ -149,7 +205,7 @@ module.exports = function(io) {
 
                 return res.status(200).json({
                     'message': 'Model removed',
-                    'doc': _doc
+                    'doc': filterExperimentFields(_doc)
                 });
             });
         });
@@ -193,7 +249,7 @@ module.exports = function(io) {
                     'model': model
                 });
 
-                return res.status(201).json(model);
+                return res.status(201).json(filterModelFields(model));
             });
         });
     });
@@ -216,7 +272,13 @@ module.exports = function(io) {
                     });
             }
 
-            return res.status(200).json(doc.models);
+            var models = [];
+
+            for (var i in doc.models) {
+                models.push(filterModelFields(doc.models[i]));
+            }
+
+            return res.status(200).json(models);
         });
     });
 
@@ -240,7 +302,7 @@ module.exports = function(io) {
 
             for (i in doc.models) {
                 if (doc.models[i]._id == req.params.mId) {
-                    return res.status(200).json(doc.models[i]);
+                    return res.status(200).json(filterModelFields(doc.models[i]));
                 }
             }
 
@@ -293,7 +355,7 @@ module.exports = function(io) {
                 }
 
                 doc.save(function(err, _doc) {
-                    return res.status(200).json(_doc.models[i]);
+                    return res.status(200).json(filterModelFields(_doc.models[i]));
                 });
             } else {
                 return res
@@ -327,8 +389,8 @@ module.exports = function(io) {
 
             for (i in doc.models) {
                 if (doc.models[i]._id == req.params.mId) {
-                    model = true;
-                    doc.models.pull(doc.models[i]);
+                    model = doc.models[i];
+                    doc.models.pull(model);
                     break;
                 }
             }
@@ -340,7 +402,8 @@ module.exports = function(io) {
                 });
 
                 doc.save(function(err, _doc) {
-                    return res.status(200).json(_doc.models[i]);
+                    console.log(JSON.stringify(model));
+                    return res.status(200).json(filterModelFields(model));
                 });
             } else {
                 return res
@@ -413,7 +476,7 @@ module.exports = function(io) {
                         'measurement': measurement
                     });
 
-                    return res.status(201).json(measurement);
+                    return res.status(201).json(filterMeasurementFields(measurement));
                 });
             } else {
                 return res
@@ -456,8 +519,14 @@ module.exports = function(io) {
                 }
             }
 
+            var measurements = [];
+
+            for (i in model.measurements) {
+                measurements.push(model.measurements)
+            }
+
             if (model) {
-                return res.status(200).json(model.measurements);
+                return res.status(200).json(measurements);
             } else {
                 return res.status(404).json({
                     'message': 'No such model'
@@ -501,7 +570,7 @@ module.exports = function(io) {
             if (model) {
                 for (i in model.measurements) {
                     if (model.measurements[i].name == req.params.name) {
-                        dataPoints.push(model.measurements[i]);
+                        dataPoints.push(filterMeasurementFields(model.measurements[i]));
                     }
                 }
 
