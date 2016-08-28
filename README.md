@@ -20,6 +20,14 @@ me a comment on twitter: [@andinfinity_GER](https://twitter.com/andinfinity_GER)
 This work was inspired by [FBLearner FLow](https://code.facebook.com/posts/1072626246134461/introducing-fblearner-flow-facebook-s-ai-backbone/)
 and [Pastalog](https://github.com/rewonc/pastalog).
 
+## Status
+![screenshot]](https://cloud.githubusercontent.com/assets/6138133/18033940/2c80178e-6d30-11e6-9f18-d661dab7f4c2.png)
+
+I'm currently working towards the first release. The UI is nearly complete, but
+I have my problems with react (new to me). A full fledged table for the model
+list shall replace the view as seen in the screenshot above. Also the socket
+communication is not at all finished.
+
 ## Installation
 Fetch the latest release as a `zip` file or fetch the code via `git clone`. `cd` into the
 directory.
