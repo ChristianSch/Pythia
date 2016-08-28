@@ -170,6 +170,10 @@ module.exports = function(io) {
                 doc.name = req.body.name;
             }
 
+            if (req.body.hyperparameter) {
+                doc.hyperparameter = req.body.hyperparameter;
+            }
+
             doc.save(function(err, _doc) {
                 if (err) {
                     return res.status(500).json({
