@@ -21,7 +21,7 @@ This work was inspired by [FBLearner FLow](https://code.facebook.com/posts/10726
 and [Pastalog](https://github.com/rewonc/pastalog).
 
 ## Status
-![screenshot]](https://cloud.githubusercontent.com/assets/6138133/18033940/2c80178e-6d30-11e6-9f18-d661dab7f4c2.png)
+![screenshot](https://cloud.githubusercontent.com/assets/6138133/18033940/2c80178e-6d30-11e6-9f18-d661dab7f4c2.png)
 
 I'm currently working towards the first release. The UI is nearly complete, but
 I have my problems with react (new to me). A full fledged table for the model
