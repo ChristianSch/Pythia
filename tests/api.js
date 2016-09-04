@@ -34,6 +34,20 @@
                 });
         });
 
+        describe('Any method', function() {
+            it('should contain propper CORS headers', function(done) {
+                request(app)
+                    .get('/api/v1')
+                    .expect(200)
+                    .end(function(err, res) {
+                        expect(res.headers['access-control-allow-origin']).to.equal('*');
+                        expect(res.headers['access-control-allow-headers']).to.equal('Origin, X-Requested-With, Content-Type, Accept');
+
+                        done(err);
+                    });
+            });
+        })
+
         describe('Get invalid route: GET /api/v1/umpalumpa', function() {
             request(app)
                 .get('/api/v1/umpalumpa')

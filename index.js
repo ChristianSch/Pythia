@@ -28,6 +28,13 @@
 
     app.use(bodyParser.json());
 
+    /* set up CORS header */
+    app.use(function(req, res, next) {
+        res.header('Access-Control-Allow-Origin', '*');
+        res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+        next();
+    });
+
     /* Custom middleware */
     app.use(api);
     app.use(frontend);
@@ -84,13 +91,6 @@
     process.on('SIGTERM', handleDisconnect);
 
     app.set('port', (process.env.PORT || 5667));
-
-    /* set up CORS header */
-    app.use(function(req, res, next) {
-        res.header('Access-Control-Allow-Origin', '*');
-        res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-        next();
-    });
 
     http.listen(app.get('port'), function() {
       console.log('listening on http://localhost:' + app.get('port'));
