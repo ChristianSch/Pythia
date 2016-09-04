@@ -78,7 +78,9 @@ module.exports = function(io) {
         });
 
         exp.save(function(err, doc) {
-            io.emit('experiments-updated', [doc]);
+            io.emit('experiment-added', {
+                'data': doc
+            });
 
             if (err) {
                 return res
@@ -181,6 +183,11 @@ module.exports = function(io) {
                     });
                 }
 
+                io.emit('experiment-updated',{
+                        '_id': req.params.expId,
+                        'data': doc
+                    });
+
                 return res.status(200).json(filterExperimentFields(_doc));
             });
         });
@@ -206,6 +213,11 @@ module.exports = function(io) {
                         'message': err.message
                     });
                 }
+
+                io.emit('experiment-removed', {
+                    '_id': req.params.expId,
+                    'data': doc
+                });
 
                 return res.status(200).json({
                     'message': 'Model removed',
@@ -237,7 +249,7 @@ module.exports = function(io) {
 
             doc.models.push(model);
 
-            doc.save(function(err, doc_) {
+            doc.save(function(err, _doc) {
                 if (err) {
                     return res
                         .status(500)
@@ -246,11 +258,9 @@ module.exports = function(io) {
                         });
                 }
 
-                io.emit('experiments-updated', [doc_]);
-                io.emit('experiment-updated', doc_);
                 io.emit('model-added', {
                     'experiment_id': doc._id,
-                    'model': model
+                    'data': model
                 });
 
                 return res.status(201).json(filterModelFields(model));
@@ -358,6 +368,12 @@ module.exports = function(io) {
                     doc.models[i].hyperparameter = req.body.hyperparameter;
                 }
 
+                io.emit('model-updated', {
+                    'experiment_id': req.params.expId,
+                    '_id': req.params.mId,
+                    'data': doc
+                });
+
                 doc.save(function(err, _doc) {
                     return res.status(200).json(filterModelFields(_doc.models[i]));
                 });
@@ -402,7 +418,8 @@ module.exports = function(io) {
             if (model) {
                 io.emit('model-removed', {
                     'experiment_id': doc._id,
-                    'model_id': req.params.mId
+                    '_id': req.params.mId,
+                    'data': doc
                 });
 
                 doc.save(function(err, _doc) {
@@ -477,7 +494,8 @@ module.exports = function(io) {
                     io.emit('measurement-added', {
                         'experiment_id': doc._id,
                         'model_id': doc.models[i]._id,
-                        'measurement': measurement
+                        'data': measurement,
+                        'name': req.body.name
                     });
 
                     return res.status(201).json(filterMeasurementFields(measurement));

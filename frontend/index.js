@@ -24,9 +24,16 @@ module.exports = function(io) {
 
     io.on('connection', function(socket) {
         // Send all the experiments
-        Experiment.find({}).sort('-date-created').exec(function(err, docs) {
+        Experiment.find({}).sort('date_added').exec(function(err, docs) {
             if (!err) {
-                socket.emit('experiments-updated', docs);
+                //  we use experiment-added to populate the experiment
+                // list initially. quite hacky.
+                for (var i = 0; i < docs.length; i ++) {
+                    socket.emit('experiment-added', {
+                        'data': docs[i],
+                        '_id': docs[i]._id
+                    });
+                }
             } else {
                 console.log(err);
             }
@@ -37,6 +44,18 @@ module.exports = function(io) {
                 '_id': id
             }, function(err, doc) {
                 socket.emit('fetch-experiment-result', doc);
+            });
+        });
+
+        socket.on('fetch-model', function(data) {
+            Experiment.findOne({
+                '_id': data.experiment_id
+            }, function(err, doc) {
+                for (var i = 0; i < doc.models.length; i++) {
+                    if (doc.models[i]._id == data.model_id) {
+                        socket.emit('fetch-model-result', doc.models[i]);
+                    }
+                }
             });
         });
     });

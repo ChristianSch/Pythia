@@ -45,10 +45,9 @@
             });
 
             socket.on('model-removed', function(data) {
-                console.log(this.experiment);
                 if (data.experiment_id == expId) {
                     for (var i = 0; i < this.experiment.models.length; i++) {
-                        if (this.experiment.models[i]._id == data.model_id) {
+                        if (this.experiment.models[i]._id == data._id) {
                             this.experiment.models.$remove(this.experiment.models[i]);
                         }
                     }
