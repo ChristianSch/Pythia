@@ -24,14 +24,18 @@
     <div class="container main-container">
         <div id="vue-instance">
             <div>
-                <h2>${ model.name }</h2>
-                <time datetime="${ model.date_added }">${ model.date_added }</time>
+                <div class="text-center">
+                    <h1>${ model.name }</h1>
+                    <small><time
+                        datetime="${ model.date_added }">${ model.date_added }
+                    </time></small>
 
-                <div class="jumbotron">
-                    ${ model.description }
+                    <p class="lead">
+                        ${ model.description }
+                    </p>
                 </div>
 
-                <h3>Measurements</h3>
+                <h2>Measurements</h2>
                 <!-- TODO: sort "cards" by singular data and then graph data,
                            prevent mixing -->
                 <div v-if="sortedMeasurements._keys.length > 0" class="jumbotron">

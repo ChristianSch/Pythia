@@ -9,7 +9,7 @@
 
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link href='https://fonts.googleapis.com/css?family=Roboto:400,500&subset=latin,greek' rel='stylesheet' type='text/css'>
+    <!--<link href='https://fonts.googleapis.com/css?family=Roboto:400,500&subset=latin,greek' rel='stylesheet' type='text/css'>-->
 </head>
 
 <body>
@@ -24,7 +24,9 @@
     <div class="container main-container">
         <div id="vue-instance">
             <div>
-                <h2>Recent Experiments</h2>
+                <div class="text-center">
+                    <h1>Recent Experiments</h1>
+                </div>
 
                 <div class="exp-stream"
                     v-if="experiments.length > 0">
@@ -40,9 +42,16 @@
                                 <a href="/experiment/${ exp._id }">
                                     <h3 id="${ exp._id ]]" class="panel-title">${ exp.name }</h3>
                                 </a>
+                                <button type="button"
+                                    class="btn btn-warning btn-sm"
+                                    v-on:click="deleteExperiment(exp._id)">
+                                        <span class="glyphicon glyphicon-trash"
+                                            aria-hidden="true"></span>
+                                </button>
                             </div><!-- .panel-heading fin -->
 
                             <div class="panel-body">
+                                <p>${ exp.date_added }</p>
                                 <p class="exp-descr">
                                     ${ exp.description }
                                 </p>
@@ -56,10 +65,6 @@
                         </div><!-- .panel fin -->
                     </div><!-- for exp in experiments fin -->
                 </div><!-- .exp-stream fin -->
-
-                <div v-if="experiments.length == 0" class="jumbotron">
-                    <p>No experiments yet, hold tight!</p>
-                </div>
             </div>
         </div>
     </div>
