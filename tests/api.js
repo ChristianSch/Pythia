@@ -34,6 +34,15 @@
                 });
         });
 
+        describe('Get invalid route: GET /api/v1/umpalumpa', function() {
+            request(app)
+                .get('/api/v1/umpalumpa')
+                .expect(404)
+                .end(function(err, res) {
+                    expect(res.body.message).to.equal('No such route');
+                });
+        });
+
         describe('Create/Get Experiment: POST/GET /experiment', function() {
             it('should create an experiment with a randomly generated name', function(done) {
                 request(app)
