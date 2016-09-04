@@ -6,7 +6,7 @@ body {
 
 .container {
     width: 90%;
-    max-width: 600px;
+    max-width: 1020px;
     margin: 0 auto;
 }
 
@@ -28,3 +28,9 @@ h3.panel-title {
     margin-top: -5px;
     margin-right: -10px;
 }
+
+.singular-data-point {
+    text-align: center;
+    font-size: 3em;
+}
+

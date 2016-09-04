@@ -9,7 +9,7 @@
 
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <link href='https://fonts.googleapis.com/css?family=Roboto:400,500&subset=latin,greek' rel='stylesheet' type='text/css'>
+    <!-- <link href='https://fonts.googleapis.com/css?family=Roboto:400,500&subset=latin,greek' rel='stylesheet' type='text/css'> -->
 </head>
 
 <body data-experiment-id="{{ experiment_id }}" data-model-id="{{ model_id }}">
@@ -32,21 +32,49 @@
                 </div>
 
                 <h3>Measurements</h3>
-                <div v-if="model.metrics.length == 0" class="jumbotron">
-                    <p>No measurements yet, hold tight!</p>
+                <!-- TODO: sort "cards" by singular data and then graph data,
+                           prevent mixing -->
+                <div v-if="sortedMeasurements._keys.length > 0" class="jumbotron">
+                    <div class="row">
+                        <div v-for="k in sortedMeasurements._keys">
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading">
+                                        ${ k | capitalize }
+                                    </div>
+                                    <div class="panel-body">
+                                        <div v-if="sortedMeasurements[k].length == 1">
+                                            <span
+                                                class="singular-data-point">
+                                                    ${ sortedMeasurements[k][0] }
+                                                </span>
+                                        </div>
+                                        <div v-else>
+                                            <canvas-chart
+                                                :key = "k"
+                                                :data = "sortedMeasurements[k]">
+                                            </canvas-chart>
+                                        </div>
+
+                                    </div><!-- panel body fin -->
+                                </div><!-- panel fin -->
+                            </div><!-- col-lg-4 fin -->
+                        </div><!-- v-for k in keys fin -->
+                    </div><!-- row fin -->
                 </div>
 
-                <div v-else v-for="metric in model.metrics">
-                    nothing yet
+                <div v-else>
+                    <p>No measurements yet, hold tight!</p>
                 </div>
             </div>
         </div>
     </div>
 
+    <script src="/js/Chart.min.js"></script>
     <script src="/js/superagent.js"></script>
     <script src="/js/vue.js"></script>
     <script src="/js/socket.io.js"></script>
-    <script src="/js/experiment.js"></script>
+    <script src="/js/model.js"></script>
 </body>
 
 </html>
