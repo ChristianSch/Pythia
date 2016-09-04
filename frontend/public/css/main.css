@@ -34,3 +34,13 @@ h3.panel-title {
     font-size: 3em;
 }
 
+td .table,
+td .table tbody,
+td .table td {
+    border-top: none !important;
+    background-color: transparent !important;
+}
+
+small > time {
+    color: #9f9f9f;
+}

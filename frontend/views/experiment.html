@@ -24,14 +24,19 @@
     <div class="container main-container">
         <div id="vue-instance">
             <div>
-                <h2>${ experiment.name }</h2>
-                <time datetime="${ experiment.date_added }">${ experiment.date_added }</time>
+                <div class="text-center">
+                    <h1>${ experiment.name }</h1>
+                    <small><time datetime="${ experiment.date_added }">
+                        ${ experiment.date_added }</time></small>
 
-                <div class="jumbotron">
-                    ${ experiment.description }
+                    <p class="lead">
+                        ${ experiment.description }
+                    </p>
                 </div>
 
-                <h3>Models</h3>
+                <h2>Models
+                    <span class="badge">${ experiment.models.length }</span>
+                </h2>
                 <div v-if="experiment.models.length == 0" class="jumbotron">
                     <p>No models yet, hold tight!</p>
                 </div>
@@ -43,35 +48,6 @@
                         type="text"
                         placeholder="Search name or description">
 
-                    <div v-for="model in experiment.models | filterBy searchText in 'name' 'description'">
-                        <div class="fade-enter panel panel-default">
-                            <div class="panel-heading">
-                                <a href="/experiment/${ experiment._id }/model/${ model._id }">
-                                    <h3 id="${ model._id }" class="panel-title">${ model.name }</h3>
-                                </a>
-                                <button type="button"
-                                    class="btn btn-warning btn-sm"
-                                    v-on:click="deleteModel(model._id)">
-                                        <span class="glyphicon glyphicon-trash"
-                                            aria-hidden="true"></span>
-                                </button>
-                                <time datetime="${ model.date_created }"></time>
-                            </div>
-
-                            <div class="panel-body">
-                                <p class="exp-descr">
-                                    ${ model.description }
-                                </p>
-
-                                <hr>
-
-                                <p class="exp-hyperp">
-                                    ${ model.hyperparameter }
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
                     <table class="table table-striped table-hover">
                         <thead>
                           <tr>
@@ -82,31 +58,30 @@
                         </thead>
                         <tbody>
                             <tr v-if="experiment.models.length > 0"
-                                v-for="model in experiment.models">
+                                v-for="model in experiment.models | filterBy searchText in 'name' 'description'"
+                                class="model-${$index}}">
                                 <td>
-                                    ${ model.name }
+                                    <a href="/experiment/${ experiment._id }/model/${ model._id }">
+                                        ${ model.name }
+                                    </a>
                                 </td>
+
                                 <td v-if="model.description">
                                     ${ model.description }
+                                    <hr>
+                                    ${model.hyperparameter}
                                 </td>
                                 <td v-else>
                                     No description provided
                                 </td>
 
-                                ${'model'|print}
                                 <td colspan="5"
-                                    v-if="model.sortedMeasurements._keys.length > 0">
-                                    <tr v-for="me in model.sortedMeasurements">
-                                            <td>${me.name}</td>
-                                            <!-- TODO: either use value,
-                                                or use the other three cols -->
-                                            <td></td>
-                                            <td>${me|avg}</td>
-                                            <td>${me|min}</td>
-                                            <td>${me|max}</td>
-                                    </tr>
+                                    v-if="model.sortedMeasurements['_keys'].length > 0">
+                                    <exp-table-metricrow
+                                        :measurements="model.sortedMeasurements">
+                                    </exp-table-metricrow>
                                 </td>
-                                <td v-else colspan="4" >
+                                <td v-else colspan="5" >
                                     no measurements yet<br>
                                 </td>
                             </tr>
