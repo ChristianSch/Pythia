@@ -13,7 +13,6 @@ Python library is currently in the making
 the frontend is nowhere near finished, we have no charts or anything beyond
 sole listing of experiments and models.**
 
-
 However, I'm always keen to hear your feedback, so create an issue or drop
 me a comment on twitter: [@andinfinity_GER](https://twitter.com/andinfinity_GER).
 
@@ -24,10 +23,10 @@ and [Pastalog](https://github.com/rewonc/pastalog).
 ![screen shot](https://cloud.githubusercontent.com/assets/6138133/18231614/34385d04-72be-11e6-8426-3345329bbe28.png)
 
 
-I'm currently working towards the first release. The UI is nearly complete, but
-I have my problems with react (new to me). A full fledged table for the model
-list shall replace the view as seen in the screenshot above. Also the socket
-communication is not at all finished.
+I'm currently working towards the first release. The charts for metrics over
+time (ANN convergion for example) aren't done yet, the socket communication
+isn't quite stable (some things lacking) and not all changes to the data
+are propagated and/or reflected to/in the frontend.
 
 ## Installation
 Fetch the latest release as a `zip` file or fetch the code via `git clone`. `cd` into the
