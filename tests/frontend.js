@@ -24,7 +24,7 @@
         describe('GET static files', function() {
             it('should return main.js', function(done) {
                 request(app)
-                    .get('/js/main.js')
+                    .get('/js/index.js')
                     .expect(200)
                     .end(function(err, res) {
                         done(err);

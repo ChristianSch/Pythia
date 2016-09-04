@@ -129,6 +129,7 @@
                     .expect(404)
                     .end(function(err, res) {
                         expect(res.body.message).to.be.ok;
+
                         done(err);
                     });
                 });
@@ -169,6 +170,7 @@
                     .expect(404)
                     .end(function(err, res) {
                         expect(res.body.message).to.be.ok;
+
                         done(err);
                     });
             });
@@ -196,6 +198,7 @@
                     .expect(404)
                     .end(function(err, res) {
                         expect(res.body.message).to.be.ok;
+
                         done(err);
                     });
             });
@@ -206,6 +209,7 @@
                     .expect(404)
                     .end(function(err, res) {
                         expect(res.body.message).to.be.ok;
+
                         done(err);
                     });
             });
@@ -271,6 +275,7 @@
                     .expect(404)
                     .end(function(err, res) {
                         expect(res.body.message).to.be.ok;
+
                         done(err);
                     });
             });
@@ -281,6 +286,7 @@
                     .expect(404)
                     .end(function(err, res) {
                         expect(res.body.message).to.be.ok;
+
                         done(err);
                     });
             });
@@ -312,6 +318,7 @@
                     .expect(404)
                     .end(function(err, res) {
                         expect(res.body.message).to.be.ok;
+
                         done(err);
                     });
             });
@@ -322,6 +329,7 @@
                     .expect(404)
                     .end(function(err, res) {
                         expect(res.body.message).to.be.ok;
+
                         done(err);
                     });
             });
@@ -344,6 +352,7 @@
                     .expect(404)
                     .end(function(err, res) {
                         expect(res.body.message).to.be.ok;
+
                         done(err);
                     });
             });
@@ -354,6 +363,7 @@
                     .expect(400)
                     .end(function(err, res) {
                         expect(res.body.message).to.equal('Missing mandatory fields (name, value)');
+
                         done(err);
                     });
             });
@@ -380,6 +390,7 @@
                     .expect(200)
                     .end(function(err, res) {
                         assert(res.body.length > 0);
+
                         done(err);
                     });
             });
@@ -399,6 +410,7 @@
                     .expect(404)
                     .end(function(err, res) {
                         expect(res.body.message).to.be.ok;
+
                         done(err);
                     });
             });
@@ -409,6 +421,7 @@
                     .expect(404)
                     .end(function(err, res) {
                         expect(res.body.message).to.be.ok;
+
                         done(err);
                     });
             });
@@ -419,6 +432,7 @@
                     .expect(404)
                     .end(function(err, res) {
                         expect(res.body.message).to.be.ok;
+
                         done(err);
                     });
             });
@@ -432,6 +446,7 @@
                     .end(function(err, res) {
                         assert(res.body.length > 0);
                         expect(res.body[0].name).to.equal('totalLoss');
+
                         done(err);
                     });
             });
@@ -442,6 +457,7 @@
                     .expect(404)
                     .end(function(err, res) {
                         expect(res.body.message).to.be.ok;
+
                         done(err);
                     });
             });
@@ -452,6 +468,7 @@
                     .expect(404)
                     .end(function(err, res) {
                         expect(res.body.message).to.be.ok;
+
                         done(err);
                     });
             });
@@ -473,6 +490,7 @@
                     .expect(404)
                     .end(function(err, res) {
                         expect(res.body.message).to.be.ok;
+
                         done(err);
                     });
             });
@@ -483,6 +501,7 @@
                     .expect(404)
                     .end(function(err, res) {
                         expect(res.body.message).to.be.ok;
+
                         done(err);
                     });
             });
@@ -493,6 +512,7 @@
                     .expect(404)
                     .end(function(err, res) {
                         expect(res.body.message).to.be.ok;
+
                         done(err);
                     });
             });
@@ -505,6 +525,7 @@
                     .expect(200)
                     .end(function(err, res) {
                         expect(res.body.message).to.be.ok;
+
                         done(err);
                     });
             });
@@ -515,6 +536,7 @@
                     .expect(500)
                     .end(function(err, res) {
                         expect(res.body.message).to.be.ok;
+
                         done(err);
                     });
             });
@@ -525,6 +547,7 @@
                     .expect(404)
                     .end(function(err, res) {
                         expect(res.body.message).to.be.ok;
+
                         done(err);
                     });
             });
@@ -538,6 +561,7 @@
                     .send({'name': 'does not matter'})
                     .end(function(err, res) {
                         expect(res.body.message).to.be.ok;
+
                         done(err);
                     });
             });
@@ -549,6 +573,7 @@
                     .send({'name': 'does not matter'})
                     .end(function(err, res) {
                         expect(res.body.message).to.be.ok;
+
                         done(err);
                     });
             });
@@ -559,6 +584,7 @@
                     .expect(404)
                     .end(function(err, res) {
                         expect(res.body.message).to.be.ok;
+
                         done(err);
                     });
             });
