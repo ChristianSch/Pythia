@@ -423,7 +423,6 @@ module.exports = function(io) {
                 });
 
                 doc.save(function(err, _doc) {
-                    console.log(JSON.stringify(model));
                     return res.status(200).json(filterModelFields(model));
                 });
             } else {
