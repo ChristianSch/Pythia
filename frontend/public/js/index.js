@@ -14,11 +14,6 @@
             });
     }
 
-    /**
-    * TODO:
-    *    * test all the socket emits
-    *    * working: experiment-added
-    */
     var vm = new Vue({
         el: '#vue-instance',
         data: {
