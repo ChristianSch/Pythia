@@ -371,7 +371,7 @@ module.exports = function(io) {
                 io.emit('model-updated', {
                     'experiment_id': req.params.expId,
                     '_id': req.params.mId,
-                    'data': doc
+                    'data': doc.models[i]
                 });
 
                 doc.save(function(err, _doc) {
