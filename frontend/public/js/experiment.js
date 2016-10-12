@@ -164,8 +164,6 @@
                     Vue.set(this.experiment.models[i],
                         'sortedMeasurements',
                         _sortByKey(this.experiment.models[i]));
-                    console.log('set sortedMeasurements: ',
-                                JSON.stringify(this.experiment.models[i].sortedMeasurements));
                     Vue.set(this.experiment.models[i], 'metrics',
                         this.experiment.models[i].sortedMeasurements._keys);
                 }
