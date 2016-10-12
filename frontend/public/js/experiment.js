@@ -87,7 +87,13 @@
     });
 
     Vue.filter('truncate', function(str, value) {
-        return (new String(str)).substring(0, value) + '…';
+        var s = new String(str);
+
+        if (s.length <= value) {
+            return s;
+        }
+
+        return (new String(s)).substring(0, value) + '…';
     });
 
     function _deleteModel(model_id) {
