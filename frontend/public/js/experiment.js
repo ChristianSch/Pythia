@@ -99,6 +99,10 @@
         var kv = {};
         kv._keys = [];
 
+        if (model.measurements === undefined) {
+            model.measurements = [];
+        }
+
         for (var i = 0; i < model.measurements.length; i++) {
             var m = model.measurements[i];
 
@@ -109,6 +113,10 @@
     }
 
     function _updateMeasurements(kv, data) {
+        if (kv === undefined || kv._keys === undefined) {
+            return _sortByKey(data);
+        }
+
         if (kv._keys.indexOf(data.name) === -1) {
             kv._keys.push(data.name);
             kv[data.name] = [data.value];
