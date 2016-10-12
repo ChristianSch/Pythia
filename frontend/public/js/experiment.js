@@ -189,6 +189,32 @@
                 }
             }.bind(this));
 
+            socket.on('model-updated', function(data) {
+                console.log('model-updated')
+                if (data.experiment_id == expId) {
+                    for (var i = 0; i < this.experiment.models.length; i++) {
+                        if (this.experiment.models[i]._id == data._id) {
+                            for (var key in data.data) {
+                                if (data.data.hasOwnProperty(key)) {
+                                    Vue.set(this.experiment.models[i],
+                                            key,
+                                            data.data[key]);
+                                }
+                            }
+                            var sortedMeasurements = _sortByKey(this.experiment.models[i]);
+
+                            Vue.set(this.experiment.models[i],
+                                    'sortedMeasurements',
+                                    sortedMeasurements);
+                            Vue.set(this.experiment.models[i], 'metrics',
+                                    sortedMeasurements._keys);
+
+                            return;
+                        }
+                    }
+                }
+            }.bind(this));
+
             socket.on('model-removed', function(data) {
                 if (data.experiment_id == expId) {
                     for (var i = 0; i < this.experiment.models.length; i++) {
