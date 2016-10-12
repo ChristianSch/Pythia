@@ -61,6 +61,14 @@
                                 v-for="model in experiment.models | filterBy searchText in 'name' 'description'"
                                 class="model-${$index}}">
                                 <td>
+                                    <button type="button"
+                                            class="btn btn-danger btn-sm"
+                                            v-on:click="deleteModel(model._id)">
+                                                <span class="glyphicon glyphicon-trash"
+                                                    aria-hidden="true"></span>
+                                        </button>
+                                    </td>
+                                <td>
                                     <a href="/experiment/${ experiment._id }/model/${ model._id }">
                                         ${ model.name }
                                     </a>
