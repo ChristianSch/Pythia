@@ -58,9 +58,6 @@
             }.bind(this));
 
             socket.on('model-removed', function(data) {
-                console.log('model-removed');
-                console.log(data);
-
                 for (var i = 0; i < this.experiments.length; i++) {
                     if (this.experiments[i]._id == data.experiment_id) {
                         console.log(this.experiments[i]);
