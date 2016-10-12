@@ -183,6 +183,12 @@
                 }
             });
 
+            socket.on('model-added', function(data) {
+                if (data.experiment_id == expId) {
+                    this.experiment.models.push(data.data);
+                }
+            }.bind(this));
+
             socket.on('model-removed', function(data) {
                 if (data.experiment_id == expId) {
                     for (var i = 0; i < this.experiment.models.length; i++) {
