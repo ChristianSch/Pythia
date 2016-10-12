@@ -43,10 +43,11 @@
                 this.experiments.unshift(data.data);
             }.bind(this));
 
-            socket.on('model-added', function(model) {
+            socket.on('model-added', function(data) {
                 for (var i = 0; i < this.experiments.length; i ++) {
-                    if (this.experiments[i]._id == model._id) {
-                        this.experiments[i].models.push(model);
+                    if (this.experiments[i]._id == data.experiment_id) {
+                        console.log(this.experiments[i]);
+                        this.experiments[i].models.push(data.data);
                     }
                 }
             }.bind(this));
