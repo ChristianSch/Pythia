@@ -38,8 +38,21 @@
                 }
             }.bind(this));
 
-            socket.on('experiment-added', function(data) {
+            socket.on('experiment-updated', function(data) {
+                for (var i = 0; i < this.experiments.length; i ++) {
+                    if (this.experiments[i]._id == data._id) {
+                        for (var key in data.data) {
+                            if (data.data.hasOwnProperty(key)) {
+                                Vue.set(this.experiments[i],
+                                        key,
+                                        data.data[key]);
+                            }
+                        }
+                    }
+                }
+            }.bind(this));
 
+            socket.on('experiment-added', function(data) {
                 this.experiments.unshift(data.data);
             }.bind(this));
 
