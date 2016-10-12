@@ -51,14 +51,16 @@
     });
 
     Vue.filter('max', function(arr) {
-        var max = 0;
+        var max = null;
 
         if (arr === undefined || !arr) {
             return 0;
         }
 
         for (var i = 0; i < arr.length; i++) {
-            if (max < arr[i]) {
+            if (max === null) {
+                max = arr[i];
+            } else if (max < arr[i]) {
                 max = arr[i];
             }
         }
@@ -67,14 +69,16 @@
     });
 
     Vue.filter('min', function(arr) {
-        var min = 0;
+        var min = null;
 
         if (arr === undefined || !arr) {
             return 0;
         }
 
         for (var i = 0; i < arr.length; i++) {
-            if (min > arr[i]) {
+            if (min === null) {
+                min = arr[i];
+            } else if (min > arr[i]) {
                 min = arr[i];
             }
         }
