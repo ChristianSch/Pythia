@@ -30,8 +30,6 @@
         },
         created: function() {
             socket.on('experiment-removed', function(data) {
-                console.log('experiment-removed');
-
                 for (var i = 0; i < this.experiments.length; i++) {
                     if (this.experiments[i]._id === data._id) {
                         this.experiments.$remove(this.experiments[i]);
@@ -41,15 +39,11 @@
             }.bind(this));
 
             socket.on('experiment-added', function(data) {
-                console.log('experiment-added');
-                console.log(data);
 
                 this.experiments.unshift(data.data);
             }.bind(this));
 
             socket.on('model-added', function(model) {
-                console.log('model-added');
-
                 for (var i = 0; i < this.experiments.length; i ++) {
                     if (this.experiments[i]._id == model._id) {
                         this.experiments[i].models.push(model);
@@ -60,8 +54,6 @@
             socket.on('model-removed', function(data) {
                 for (var i = 0; i < this.experiments.length; i++) {
                     if (this.experiments[i]._id == data.experiment_id) {
-                        console.log(this.experiments[i]);
-
                         for (var j = 0; j < this.experiments[i].models.length; j++) {
                             if (this.experiments[i].models[j]._id == data._id) {
                                 this.experiments[i].models.$remove(
