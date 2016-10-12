@@ -50,11 +50,12 @@
 
                     <table class="table table-striped table-hover">
                         <thead>
-                          <tr>
-                            <th v-for="key in columns">
-                              ${ key | capitalize }
-                            </th>
-                          </tr>
+                            <tr>
+                                <th>&nbsp;</th>
+                                <th v-for="key in columns">
+                                    ${ key | capitalize }
+                                </th>
+                            </tr>
                         </thead>
                         <tbody>
                             <tr v-if="experiment.models.length > 0"
