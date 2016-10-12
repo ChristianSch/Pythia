@@ -224,6 +224,19 @@
                     }
                 }
             }.bind(this));
+
+            socket.on('measurement-added', function(data) {
+                if (data.experiment_id == expId) {
+                    for (var i = 0; i < this.experiment.models.length; i++) {
+                        if (this.experiment.models[i]._id == data.model_id) {
+                            Vue.set(this.experiment.models[i],
+                                'sortedMeasurements',
+                                _updateMeasurements(this.experiment.models[i].sortedMeasurements,
+                                                    data.data));
+                        }
+                    }
+                }
+            }.bind(this));
         }
     });
 })();
