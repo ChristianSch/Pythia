@@ -17,7 +17,9 @@ However, I'm always keen to hear your feedback, so create an issue or drop
 me a comment on twitter: [@andinfinity_GER](https://twitter.com/andinfinity_GER).
 
 This work was inspired by [FBLearner FLow](https://code.facebook.com/posts/1072626246134461/introducing-fblearner-flow-facebook-s-ai-backbone/)
-and [Pastalog](https://github.com/rewonc/pastalog).
+and [Pastalog](https://github.com/rewonc/pastalog). Here's a relevant post on
+[reddit](https://www.reddit.com/r/MachineLearning/comments/5gyzqj/d_how_do_you_keep_track_of_your_experiments/)
+with lots of alternatives.
 
 ## Status
 ![screen shot](https://cloud.githubusercontent.com/assets/6138133/18231614/34385d04-72be-11e6-8426-3345329bbe28.png)
