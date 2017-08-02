@@ -26,7 +26,7 @@ with lots of alternatives.
 
 
 I'm currently working towards the first release. The charts for metrics over
-time (ANN convergion for example) aren't done yet, the socket communication
+time (ANN convergence for example) aren't done yet, the socket communication
 isn't quite stable (some things lacking) and not all changes to the data
 are propagated and/or reflected to/in the frontend.
 
