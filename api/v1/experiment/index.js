@@ -13,7 +13,8 @@ module.exports = function(io) {
         path = require('path'),
         app = module.exports = express(),
         mongoose = require('mongoose'),
-        haikunate = require('haikunator');
+        Haikunator = require('haikunator');
+    var haikunator = new Haikunator();
 
     var Experiment = require(path.join(__dirname,
                         '../../..',
@@ -73,7 +74,7 @@ module.exports = function(io) {
 
     app.post('/api/v1/experiment/', function(req, res) {
         var exp = new Experiment({
-            'name': req.body.name || haikunate(),
+            'name': req.body.name || haikunator.haikunate(),
             'description': req.body.description || "No description given"
         });
 
@@ -242,7 +243,7 @@ module.exports = function(io) {
             }
 
             var model = doc.models.create({
-                'name': req.body.name || haikunate(),
+                'name': req.body.name || haikunator.haikunate(),
                 'description': req.body.description,
                 'hyperparameter': req.body.hyperparameter
             });
