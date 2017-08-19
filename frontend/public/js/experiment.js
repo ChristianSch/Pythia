@@ -7,22 +7,24 @@
     Vue.config.delimiters = ['${', '}'];
 
     Vue.component('exp-table-metricrow', {
-        template: '<table class="table"><tr v-for="m in measurements._keys">\
-            <td>${m}</td>\
-            <template v-if="measurements[m].length == 1">\
-                <td title="${ measurements[m][0] }">\
-                    ${ measurements[m][0] | truncate "6" }</td>\
-                <td>&mdash;</td><td>&mdash;</td><td>&mdash;</td>\
-            </template>\
-            <template v-else>\
-            <td>&mdash;</td>\
-            <td title="${measurements[m] | avg }">\
-                ${ measurements[m] | avg | truncate "6" }</td>\
-            <td title="${measurements[m] | min }">\
-                ${ measurements[m] | min | truncate "6" }</td>\
-            <td title="${ measurements[m] | max }">\
-                ${ measurements[m] | max | truncate "6" }</td>\
-            </template></tr></table>',
+        template: '<table class="table">\
+            <tr v-for="m in measurements._keys">\
+                <td>${m}</td>\
+                <template v-if="measurements[m].length == 1">\
+                    <td title="${ measurements[m][0] }">\
+                        ${ measurements[m][0] | truncate "6" }</td>\
+                    <td>&mdash;</td><td>&mdash;</td><td>&mdash;</td>\
+                </template>\
+                <template v-else>\
+                    <td>&mdash;</td>\
+                    <td title="${measurements[m] | avg }">\
+                        ${ measurements[m] | avg | truncate "6" }</td>\
+                    <td title="${measurements[m] | min }">\
+                        ${ measurements[m] | min | truncate "6" }</td>\
+                    <td title="${ measurements[m] | max }">\
+                        ${ measurements[m] | max | truncate "6" }</td>\
+                </template>\
+                </tr></table>',
         props: ['measurements']
     });
 
